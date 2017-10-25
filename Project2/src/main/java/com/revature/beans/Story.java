@@ -16,25 +16,9 @@ public class Story implements Serializable {
 	 */
 	private static final long serialVersionUID = 3437652641718304355L;
 	
-	private int storyId;
-	private int boardId;
-	private int lnId;
-	
-	/*
-	 * A enum type that verifies our lane type using singleton DP
-	 */
-	private enum lnName {
-		BACKLOG(1), TODO(2), INPROGRESS(3), TEST(4), VERIFY(5), DONE(6);
-		private final int value;
-		private 	lnName(int value) {
-			this.value = value;
-		}
-		
-		public int getType() {
-			return value;
-		}
-	};
-	
+	private Story story;
+	private Board board;
+	private LaneType laneType;
 	private String storyName;
 	private int storyPoints;
 	private String storyDesc;
@@ -44,66 +28,41 @@ public class Story implements Serializable {
 		super();
 	}
 
-	public Story(int storyId, int boardId, int laneId, String storyName, int storyPoints, String storyDesc, Date lastMoveDate) {
+	public Story(Story story, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
+			Date lastMoveDate) {
 		super();
-		this.storyId = storyId;
-		this.boardId = boardId;
-		
-		try {
-			switch(laneId) {
-			case 1:
-				this.lnId = lnName.BACKLOG.getType();
-				break;
-			case 2:
-				this.lnId = lnName.TODO.getType();
-				break;
-			case 3:
-				this.lnId = lnName.INPROGRESS.getType();
-				break;
-			case 4:
-				this.lnId = lnName.TEST.getType();
-				break;
-			case 5:
-				this.lnId = lnName.VERIFY.getType();
-				break;
-			case 6:
-				this.lnId = lnName.DONE.getType();
-				break;
-			default:
-				throw new InvalidLaneTypeException();
-		} 
-		} catch (InvalidLaneTypeException e) {
-			e.printStackTrace();
-		}
-		
+		this.story = story;
+		this.board = board;
+		this.laneType = laneType;
 		this.storyName = storyName;
 		this.storyPoints = storyPoints;
 		this.storyDesc = storyDesc;
 		this.lastMoveDate = lastMoveDate;
 	}
 
-	public int getStoryId() {
-		return storyId;
+	
+	public Story getStory() {
+		return story;
 	}
 
-	public void setStoryId(int storyId) {
-		this.storyId = storyId;
+	public void setStory(Story story) {
+		this.story = story;
 	}
 
-	public int getBoardId() {
-		return boardId;
+	public Board getBoard() {
+		return board;
 	}
 
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 
-	public int getLaneId() {
-		return lnId;
+	public LaneType getLaneType() {
+		return laneType;
 	}
 
-	public void setLaneId(int laneId) {
-		this.lnId = laneId;
+	public void setLaneType(LaneType laneType) {
+		this.laneType = laneType;
 	}
 
 	public String getStoryName() {
@@ -144,7 +103,7 @@ public class Story implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Story [storyId=" + storyId + ", boardId=" + boardId + ", laneId=" + lnId + ", storyName=" + storyName
+		return "Story [storyId=" + story + ", boardId=" + board + ", laneId=" + laneType + ", storyName=" + storyName
 				+ ", storyPoints=" + storyPoints + ", storyDesc=" + storyDesc + ", lastMoveDate=" + lastMoveDate + "]";
 	}
 }

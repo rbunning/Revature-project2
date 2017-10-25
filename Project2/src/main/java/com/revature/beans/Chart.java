@@ -14,8 +14,8 @@ public class Chart implements Serializable {
 	 */
 	private static final long serialVersionUID = 8410665221636520198L;
 
-	private int chardId;
-	private int boardId;
+	private int chartId;
+	private Board board;
 	private String chartTitle;
 	private Date startDate;
 	private Date endDate;
@@ -24,29 +24,29 @@ public class Chart implements Serializable {
 		super();
 	}
 
-	public Chart(int chardId, int boardId, String chartTitle, Date startDate, Date endDate) {
+	public Chart(int chardId, Board board, String chartTitle, Date startDate, Date endDate) {
 		super();
-		this.chardId = chardId;
-		this.boardId = boardId;
+		this.chartId = chardId;
+		this.board = board;
 		this.chartTitle = chartTitle;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
 	public int getChardId() {
-		return chardId;
+		return chartId;
 	}
 
 	public void setChardId(int chardId) {
-		this.chardId = chardId;
+		this.chartId = chardId;
 	}
 
-	public int getBoardId() {
-		return boardId;
+	public Board getBoard() {
+		return board;
 	}
 
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
+	public void setBoardId(Board board) {
+		this.board = board;
 	}
 
 	public String getChartTitle() {
@@ -79,7 +79,7 @@ public class Chart implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Chart [chardId=" + chardId + ", boardId=" + boardId + ", chartTitle=" + chartTitle + ", startDate="
+		return "Chart [chardId=" + chartId + ", boardId=" + board + ", chartTitle=" + chartTitle + ", startDate="
 				+ startDate + ", endDate=" + endDate + "]";
 	}
 }
