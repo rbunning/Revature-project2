@@ -77,6 +77,14 @@ CREATE TABLE user_comment(
  FOREIGN KEY(su_id) REFERENCES scrum_user(su_id)
 );
 /
+CREATE TABLE board_user_join(
+ board_id INT,
+ su_id INT,
+ PRIMARY KEY(board_id, su_id),
+ FOREIGN KEY(board_id) REFERENCES board(board_id),
+ FOREIGN KEY(su_id) REFERENCES scrum_user(su_id)
+);
+/
 --Sequences and triggers for primary keys
 CREATE SEQUENCE scrum_user_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
