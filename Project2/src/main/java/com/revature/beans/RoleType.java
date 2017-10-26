@@ -1,14 +1,29 @@
+
 package com.revature.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ROLE_TYPE")
 public class RoleType implements Serializable {
 
 	/**
-	 * 
+	 * ROLE_TYPE -table
+	 * RT_ID -column
+	 * RT_NAME -column
 	 */
 	private static final long serialVersionUID = 7877052733521207661L;
+	
+	@Id
+	@Column(name="RT_ID")
 	private int roleId;
+	
+	@Column(name="RT_NAME")
 	private String roleName;
 
 	public RoleType() {
@@ -42,3 +57,4 @@ public class RoleType implements Serializable {
 		return "RoleType [roleId=" + roleId + ", roleName=" + roleName + "]";
 	}
 }
+
