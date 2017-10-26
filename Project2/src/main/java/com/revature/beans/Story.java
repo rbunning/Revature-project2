@@ -8,30 +8,29 @@ import java.io.Serializable;
  */
 import java.sql.Date;
 
-import com.revature.exceptions.InvalidLaneTypeException;
 public class Story implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3437652641718304355L;
-	
-	private Story story;
+
+	private int storyId;
 	private Board board;
 	private LaneType laneType;
 	private String storyName;
 	private int storyPoints;
 	private String storyDesc;
 	private Date lastMoveDate;
-	
+
 	public Story() {
 		super();
 	}
 
-	public Story(Story story, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
+	public Story(int storyId, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
 			Date lastMoveDate) {
 		super();
-		this.story = story;
+		this.storyId = storyId;
 		this.board = board;
 		this.laneType = laneType;
 		this.storyName = storyName;
@@ -40,13 +39,12 @@ public class Story implements Serializable {
 		this.lastMoveDate = lastMoveDate;
 	}
 
-	
-	public Story getStory() {
-		return story;
+	public int getStory() {
+		return storyId;
 	}
 
-	public void setStory(Story story) {
-		this.story = story;
+	public void setStory(int storyId) {
+		this.storyId = storyId;
 	}
 
 	public Board getBoard() {
@@ -103,7 +101,7 @@ public class Story implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Story [storyId=" + story + ", boardId=" + board + ", laneId=" + laneType + ", storyName=" + storyName
+		return "Story [storyId=" + storyId + ", boardId=" + board + ", laneId=" + laneType + ", storyName=" + storyName
 				+ ", storyPoints=" + storyPoints + ", storyDesc=" + storyDesc + ", lastMoveDate=" + lastMoveDate + "]";
 	}
 }
