@@ -9,13 +9,13 @@ public class LaneType implements Serializable{
 	private static final long serialVersionUID = -6640798122939665294L;
 	
 	private int ltId;
-	private int ltName;
+	private String ltName;
 	
 	public LaneType() {
 		super();
 	}
 
-	public LaneType(int ltId, int ltName) {
+	public LaneType(int ltId, String ltName) {
 		super();
 		this.ltId = ltId;
 		this.ltName = ltName;
@@ -29,11 +29,11 @@ public class LaneType implements Serializable{
 		this.ltId = ltId;
 	}
 
-	public int getLtName() {
+	public String getLtName() {
 		return ltName;
 	}
 
-	public void setLtName(int ltName) {
+	public void setLtName(String ltName) {
 		this.ltName = ltName;
 	}
 

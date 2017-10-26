@@ -1,9 +1,15 @@
 package com.revature.beans;
 
-public class ScrumUser {
+import java.io.Serializable;
 
+public class ScrumUser implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1738765309975039165L;
 	private int scrumUserId;
-	private RoleType RoleId;
+	private RoleType roleType;
 	private String scrumUserFirstname;
 	private String scrumUserLastname;
 	private String scrumUserUsername;
@@ -13,11 +19,11 @@ public class ScrumUser {
 		super();
 	}
 
-	public ScrumUser(int scrumUerId, RoleType roleId, String scrumUserFirstname, String scrumUserLastname,
+	public ScrumUser(int scrumUerId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
 			String scrumUserUsername, String scrumUserPassword) {
 		super();
 		this.scrumUserId = scrumUerId;
-		RoleId = roleId;
+		this.roleType = roleType;
 		this.scrumUserFirstname = scrumUserFirstname;
 		this.scrumUserLastname = scrumUserLastname;
 		this.scrumUserUsername = scrumUserUsername;
@@ -33,11 +39,11 @@ public class ScrumUser {
 	}
 
 	public RoleType getRoleId() {
-		return RoleId;
+		return roleType;
 	}
 
 	public void setRoleId(RoleType roleId) {
-		RoleId = roleId;
+		this.roleType = roleId;
 	}
 
 	public String getScrumUserFirstname() {
@@ -74,7 +80,7 @@ public class ScrumUser {
 
 	@Override
 	public String toString() {
-		return "ScrumUser [scrumUerId=" + scrumUserId + ", RoleId=" + RoleId + ", scrumUserFirstname="
+		return "ScrumUser [scrumUerId=" + scrumUserId + ", RoleId=" + roleType + ", scrumUserFirstname="
 				+ scrumUserFirstname + ", scrumUserLastname=" + scrumUserLastname + ", scrumUserUsername="
 				+ scrumUserUsername + ", scrumUserPassword=" + scrumUserPassword + "]";
 	}
