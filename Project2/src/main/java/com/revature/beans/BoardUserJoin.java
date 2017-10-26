@@ -23,7 +23,7 @@ public class BoardUserJoin implements Serializable {
 	@JoinColumn(name="BOARD_ID")
 	private Board board;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="SU_ID")
 	private ScrumUser scrumUser;
 

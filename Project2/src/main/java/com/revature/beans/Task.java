@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,7 +29,7 @@ public class Task implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="taskSeq")
 	private int taskId;
 	
-	@OneToMany(fetch=FetchType.EAGER) //Setting fetch type to eager so a story can grab multiple tasks
+	@ManyToOne(fetch=FetchType.EAGER) //Setting fetch type to eager so a story can grab multiple tasks
 	@JoinColumn(name="STORY_ID")
 	private Story story;
 	
