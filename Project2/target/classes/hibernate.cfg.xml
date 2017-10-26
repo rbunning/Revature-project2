@@ -16,11 +16,13 @@
 		<property name="hibernate.hbm2ddl.auto">none</property>
 		<property name="hibernate.format_sql">true</property>
         <mapping class="com.revature.beans.Board" />
+        <mapping class="com.revature.beans.BoardUserJoin" />
         <mapping class="com.revature.beans.Chart" />
         <mapping class="com.revature.beans.LaneType" />
         <mapping class="com.revature.beans.RoleType" />
         <mapping class="com.revature.beans.ScrumUser" />
         <mapping class="com.revature.beans.Story" />
+        <mapping class="com.revature.beans.Task" />
         <mapping class="com.revature.beans.UserComment" />
     </session-factory>
 </hibernate-configuration>
