@@ -1,9 +1,14 @@
 package com.revature.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Component("appService")
+import com.revature.dao.Dao;
+
+@Service()
 public class AppService {
 	
+	@Autowired
+	Dao dao;
 
 }

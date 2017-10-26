@@ -1,10 +1,13 @@
 package com.revature.dao;
 
-import org.springframework.stereotype.Component;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Component("daoImpl")
 public class DaoImpl implements Dao{
+	
+	@Autowired
+	SessionFactory sessionFactory;
 
 }
