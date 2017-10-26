@@ -2,6 +2,20 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="TASK")
+
 public class Task implements Serializable {
 
 	/**
@@ -9,8 +23,17 @@ public class Task implements Serializable {
 	 */
 	private static final long serialVersionUID = 4991925864180552219L;
 	
+	@Id
+	@Column(name="TASK_ID")
+	@SequenceGenerator(name="taskSeq",sequenceName="task_seq", allocationSize=1)        
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="taskSeq")
 	private int taskId;
+	
+	@ManyToOne(fetch=FetchType.EAGER) //Setting fetch type to eager so a story can grab multiple tasks
+	@JoinColumn(name="STORY_ID")
 	private Story story;
+	
+	@Column(name="TASK_DESC")
 	private String description;
 
 	public Task() {
