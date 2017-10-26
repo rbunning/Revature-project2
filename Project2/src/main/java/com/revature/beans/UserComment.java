@@ -2,17 +2,47 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="USER_COMMENT")
 public class UserComment implements Serializable {
 
 	/**
-	 * 
+	 * UC_ID
+	 * STORY_ID
+	 * SU_ID
+	 * CHART_TITLE
+	 * UC_DATE
 	 */
 	private static final long serialVersionUID = 6633221483595409897L;
 
-	private int userComment;
+	@Id
+	@Column(name="UC_ID")
+	@SequenceGenerator(sequenceName = "TX_SEQ", name = "TX_SEQ")
+	@GeneratedValue(generator = "TX_SEQ", strategy = GenerationType.SEQUENCE)
+	private int userCommentId;
+	
+	@ManyToOne
+	@Column(name="STORY_ID")
 	private Story story;
+	
+	@ManyToOne
+	@Column(name="SU_ID")
 	private ScrumUser scrumUser;
+	
+	@Column(name="CHART_TITLE")
 	private String ChartTitle;
+	
+	@Column(name="UC_DATE")
 	private String UserCommentDate;
 
 	public UserComment() {
@@ -21,7 +51,7 @@ public class UserComment implements Serializable {
 
 	public UserComment(int userComment, Story story, ScrumUser scrumUser, String chartTitle, String userCommentDate) {
 		super();
-		this.userComment = userComment;
+		this.userCommentId = userComment;
 		this.story = story;
 		this.scrumUser = scrumUser;
 		ChartTitle = chartTitle;
@@ -29,11 +59,11 @@ public class UserComment implements Serializable {
 	}
 
 	public int getUserComment() {
-		return userComment;
+		return userCommentId;
 	}
 
 	public void setUserComment(int userComment) {
-		this.userComment = userComment;
+		this.userCommentId = userComment;
 	}
 
 	public Story getStory() {
@@ -74,7 +104,7 @@ public class UserComment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserComment [userComment=" + userComment + ", story=" + story + ", scrumUser=" + scrumUser
+		return "UserComment [userComment=" + userCommentId + ", story=" + story + ", scrumUser=" + scrumUser
 				+ ", ChartTitle=" + ChartTitle + ", UserCommentDate=" + UserCommentDate + "]";
 	}
 
