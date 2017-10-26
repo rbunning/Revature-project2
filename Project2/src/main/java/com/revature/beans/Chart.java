@@ -27,7 +27,7 @@ public class Chart implements Serializable {
 	private static final long serialVersionUID = 8410665221636520198L;
 	
 	@Id
-	@Column(name="CHARD_ID")
+	@Column(name="CHART_ID")
 	@SequenceGenerator(allocationSize=1, sequenceName="CHART_SEQ", name="C_SEQ")
 	@GeneratedValue(generator="C_SEQ", strategy=GenerationType.SEQUENCE)
 	private int chartId;
