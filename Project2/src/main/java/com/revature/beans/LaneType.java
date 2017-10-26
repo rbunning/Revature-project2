@@ -3,7 +3,12 @@ package com.revature.beans;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="LANE_TYPE")
 
 public class LaneType implements Serializable{
 	/**
