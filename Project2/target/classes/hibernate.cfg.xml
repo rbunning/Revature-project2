@@ -21,5 +21,6 @@
         <mapping class="com.revature.beans.RoleType" />
         <mapping class="com.revature.beans.ScrumUser" />
         <mapping class="com.revature.beans.Story" />
+        <mapping class="com.revature.beans.UserComment" />
     </session-factory>
 </hibernate-configuration>
