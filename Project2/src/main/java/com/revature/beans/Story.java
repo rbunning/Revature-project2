@@ -8,19 +8,40 @@ import java.io.Serializable;
  */
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="STORY")
 public class Story implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3437652641718304355L;
 
+	@Id
+	@Column(name="STORY_ID")
+	@SequenceGenerator(name="storySeq",sequenceName="story_seq", allocationSize=1)        
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="storySeq") 
 	private int storyId;
+	@ManyToOne
+	@JoinColumn(name = "BOARD_ID")
 	private Board board;
+	@ManyToOne
+	@JoinColumn(name = "LT_ID")
 	private LaneType laneType;
+	@Column(name="STORY_NAME")
 	private String storyName;
+	@Column(name="STORY_POINTS")
 	private int storyPoints;
+	@Column(name="STORY_DESC")
 	private String storyDesc;
+	@Column(name="LAST_MOVE_DATE")
 	private Date lastMoveDate;
 
 	public Story() {
