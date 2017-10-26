@@ -38,7 +38,7 @@ public class Chart implements Serializable {
 	private int chartId;
 	
 	@ManyToOne
-	@Column(name="BOARD_ID")
+	@JoinColumn(name="BOARD_ID")
 	private Board board;
 	
 	@Column(name="CHART_TITLE")
