@@ -1,3 +1,4 @@
+
 package com.revature.beans;
 
 import java.io.Serializable;
@@ -56,3 +57,4 @@ public class RoleType implements Serializable {
 		return "RoleType [roleId=" + roleId + ", roleName=" + roleName + "]";
 	}
 }
+

@@ -2,6 +2,13 @@ package com.revature.beans;
 
 import java.io.Serializable;
 import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 /**
  * 
  * @author jay
@@ -10,14 +17,30 @@ import java.sql.Date;
 public class Chart implements Serializable {
 
 	/**
-	 * 
+	 * Chart 	table
+	 * CHART_ID	column
+	 * BOARD_ID	column
+	 * CHART_TITLE	column
+	 * START_DATE	column
+	 * END_DATE		column
 	 */
 	private static final long serialVersionUID = 8410665221636520198L;
-
+	
+	@Id
+	@Column(name="CHART_ID")
+	@SequenceGenerator(allocationSize=1, sequenceName="CHART_SEQ", name="C_SEQ")
+	@GeneratedValue(generator="C_SEQ", strategy=GenerationType.SEQUENCE)
 	private int chartId;
+	
+	@ManyToOne
+	@Column(name="BOARD_ID")
 	private Board board;
+	
+	@Column(name="CHART_TITLE")
 	private String chartTitle;
+	@Column(name="START_DATE")
 	private Date startDate;
+	@Column(name="END_DATE")
 	private Date endDate;
 	
 	public Chart() {
