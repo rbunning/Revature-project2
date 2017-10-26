@@ -1,5 +1,5 @@
 package com.revature.dao;
 
-public class DaoImpl {
+public class DaoImpl implements Dao{
 
 }
