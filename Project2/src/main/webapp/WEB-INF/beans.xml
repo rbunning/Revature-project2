@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
-<context:component-scan base-package="com.revature"></context:component-scan>
-<mvc:annotation-driven /> 
-<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	<context:component-scan base-package="com.revature"></context:component-scan>
+	<mvc:annotation-driven /> 
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<tx:annotation-driven />
+	<aop:aspectj-autoproxy />
+	<!-- <bean id="Project2db" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/oradb" /> </bean> -->
+	<bean id="Project2db" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- Setter DI of Username, Pw, URL, Driver -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="username" value="flashcard_db"></property>
+		<property name="password" value="p4ssw0rd"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+	</bean>
+	<bean id="ormsessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- Inject the DataSource bean using set method -->
+		<!-- would use constructor tag instead of property to use constructor method -->
+		<property name="dataSource" ref="Project2db"></property>
 
-<aop:aspectj-autoproxy/>
+		<!-- Now supply the rest of the Hibernate Properties -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+			</props>
+		</property>
+
+		<!-- scans for JPA -->
+		<property name="packagesToScan" value="com.revature.beans" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="ormsessionFactory"></property>
+	</bean>
 </beans>
