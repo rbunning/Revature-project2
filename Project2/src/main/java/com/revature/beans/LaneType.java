@@ -2,20 +2,35 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="LANE_TYPE")
+
 public class LaneType implements Serializable{
 	/**
+	 * LANE_TYPE table
+	 * LN_ID		column
+	 * LN_NAME	column
 	 * 
 	 */
 	private static final long serialVersionUID = -6640798122939665294L;
 	
+	@Id
+	@Column(name="LN_ID")
 	private int ltId;
-	private int ltName;
+	
+	@Column(name="LN_NAME")
+	private String ltName;
 	
 	public LaneType() {
 		super();
 	}
 
-	public LaneType(int ltId, int ltName) {
+	public LaneType(int ltId, String ltName) {
 		super();
 		this.ltId = ltId;
 		this.ltName = ltName;
@@ -29,11 +44,11 @@ public class LaneType implements Serializable{
 		this.ltId = ltId;
 	}
 
-	public int getLtName() {
+	public String getLtName() {
 		return ltName;
 	}
 
-	public void setLtName(int ltName) {
+	public void setLtName(String ltName) {
 		this.ltName = ltName;
 	}
 

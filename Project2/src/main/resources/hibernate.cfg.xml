@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+		<property name="hibernate.connection.username">project2</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:octocat.c21x4yygth5e.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+
+		<!-- New Hibernate stuff -->
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">none</property>
+		<property name="hibernate.format_sql">true</property>
+        <mapping class="com.revature.beans.Board" />
+        <mapping class="com.revature.beans.BoardUserJoin" />
+        <mapping class="com.revature.beans.Chart" />
+        <mapping class="com.revature.beans.LaneType" />
+        <mapping class="com.revature.beans.RoleType" />
+        <mapping class="com.revature.beans.ScrumUser" />
+        <mapping class="com.revature.beans.Story" />
+        <mapping class="com.revature.beans.Task" />
+        <mapping class="com.revature.beans.UserComment" />
+    </session-factory>
+</hibernate-configuration>

@@ -8,30 +8,50 @@ import java.io.Serializable;
  */
 import java.sql.Date;
 
-import com.revature.exceptions.InvalidLaneTypeException;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="STORY")
 public class Story implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3437652641718304355L;
-	
-	private Story story;
+
+	@Id
+	@Column(name="STORY_ID")
+	@SequenceGenerator(name="storySeq",sequenceName="story_seq", allocationSize=1)        
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="storySeq") 
+	private int storyId;
+	@ManyToOne
+	@JoinColumn(name = "BOARD_ID")
 	private Board board;
+	@ManyToOne
+	@JoinColumn(name = "LT_ID")
 	private LaneType laneType;
+	@Column(name="STORY_NAME")
 	private String storyName;
+	@Column(name="STORY_POINTS")
 	private int storyPoints;
+	@Column(name="STORY_DESC")
 	private String storyDesc;
+	@Column(name="LAST_MOVE_DATE")
 	private Date lastMoveDate;
-	
+
 	public Story() {
 		super();
 	}
 
-	public Story(Story story, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
+	public Story(int storyId, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
 			Date lastMoveDate) {
 		super();
-		this.story = story;
+		this.storyId = storyId;
 		this.board = board;
 		this.laneType = laneType;
 		this.storyName = storyName;
@@ -40,13 +60,12 @@ public class Story implements Serializable {
 		this.lastMoveDate = lastMoveDate;
 	}
 
-	
-	public Story getStory() {
-		return story;
+	public int getStory() {
+		return storyId;
 	}
 
-	public void setStory(Story story) {
-		this.story = story;
+	public void setStory(int storyId) {
+		this.storyId = storyId;
 	}
 
 	public Board getBoard() {
@@ -103,7 +122,7 @@ public class Story implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Story [storyId=" + story + ", boardId=" + board + ", laneId=" + laneType + ", storyName=" + storyName
+		return "Story [storyId=" + storyId + ", boardId=" + board + ", laneId=" + laneType + ", storyName=" + storyName
 				+ ", storyPoints=" + storyPoints + ", storyDesc=" + storyDesc + ", lastMoveDate=" + lastMoveDate + "]";
 	}
 }
