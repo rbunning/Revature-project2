@@ -29,7 +29,7 @@ public class Task implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="taskSeq")
 	private int taskId;
 	
-	@ManyToOne(fetch=FetchType.EAGER) //Setting fetch type to eager so a story can grab multiple tasks
+	@ManyToOne
 	@JoinColumn(name="STORY_ID")
 	private Story story;
 	
