@@ -3,6 +3,10 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	<welcome-file-list>
+		<welcome-file>resources/index.html</welcome-file>
+	</welcome-file-list>
+
 	<display-name>Project2</display-name>
 	<servlet>
 		<servlet-name>SpringServlet</servlet-name>

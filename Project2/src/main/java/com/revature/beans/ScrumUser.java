@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ public class ScrumUser implements Serializable {
 	private int scrumUserId;
 	
 	@ManyToOne
-	@Column(name="RT_ID")
+	@JoinColumn(name="RT_ID")
 	private RoleType roleType;
 	
 	@Column(name="SU_FN")
@@ -67,8 +68,8 @@ public class ScrumUser implements Serializable {
 		return scrumUserId;
 	}
 
-	public void setScrumUerId(int scrumUerId) {
-		this.scrumUserId = scrumUerId;
+	public void setScrumUserId(int scrumUserId) {
+		this.scrumUserId = scrumUserId;
 	}
 
 	public RoleType getRoleId() {

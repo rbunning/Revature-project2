@@ -9,12 +9,18 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 	<context:component-scan base-package="com.revature"></context:component-scan>
-	<mvc:annotation-driven />
+	<mvc:annotation-driven /> 
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 	<tx:annotation-driven />
 	<aop:aspectj-autoproxy />
-	<bean id="Project2db" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/oradb" />
+	<!-- <bean id="Project2db" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/oradb" /> </bean> -->
+	<bean id="Project2db" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- Setter DI of Username, Pw, URL, Driver -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="username" value="flashcard_db"></property>
+		<property name="password" value="p4ssw0rd"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 	</bean>
 	<bean id="ormsessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -34,7 +40,8 @@
 		<!-- scans for JPA -->
 		<property name="packagesToScan" value="com.revature.beans" />
 	</bean>
-<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-	<property name="sessionFactory" ref="ormsessionFactory"></property>
-</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="ormsessionFactory"></property>
+	</bean>
 </beans>
