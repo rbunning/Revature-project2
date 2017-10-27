@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,11 +34,11 @@ public class UserComment implements Serializable {
 	private int userCommentId;
 	
 	@ManyToOne
-	@Column(name="STORY_ID")
+	@JoinColumn(name="STORY_ID")
 	private Story story;
 	
 	@ManyToOne
-	@Column(name="SU_ID")
+	@JoinColumn(name="SU_ID")
 	private ScrumUser scrumUser;
 	
 	@Column(name="CHART_TITLE")
