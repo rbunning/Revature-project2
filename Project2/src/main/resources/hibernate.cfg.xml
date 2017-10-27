@@ -5,9 +5,15 @@
  
 <hibernate-configuration>
     <session-factory>
-		<property name="hibernate.connection.username">project2</property>
+		<!-- <property name="hibernate.connection.username">project2</property>
 		<property name="hibernate.connection.password">p4ssw0rd</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:octocat.c21x4yygth5e.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property> -->
+		
+		<!-- Testing DaoImpl on UAT RDS -->
+		<property name="hibernate.connection.username">project2UAT</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:octocat.c85bnfyw5s1j.us-east-2.rds.amazonaws.com:1521:ORCL</property>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 
 		<!-- New Hibernate stuff -->
