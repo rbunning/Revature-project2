@@ -12,24 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-/**
- * 
- * @author jay
- *
- */
 
 @Entity
 @Table(name="CHART")
 public class Chart implements Serializable {
 
-	/**
-	 * Chart 	table
-	 * CHART_ID	column
-	 * BOARD_ID	column
-	 * CHART_TITLE	column
-	 * START_DATE	column
-	 * END_DATE		column
-	 */
 	private static final long serialVersionUID = 8410665221636520198L;
 	
 	@Id
