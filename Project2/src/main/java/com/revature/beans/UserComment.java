@@ -17,14 +17,6 @@ import javax.persistence.Table;
 @Table(name="USER_COMMENT")
 public class UserComment implements Serializable {
 
-	/**
-	 * USER_COMMENT -table
-	 * UC_ID -column
-	 * STORY_ID -column
-	 * SU_ID -column
-	 * CHART_TITLE -column
-	 * UC_DATE -column
-	 */
 	private static final long serialVersionUID = 6633221483595409897L;
 
 	@Id

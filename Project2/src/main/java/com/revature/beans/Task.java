@@ -17,9 +17,6 @@ import javax.persistence.Table;
 
 public class Task implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4991925864180552219L;
 	
 	@Id

@@ -11,19 +11,13 @@ import javax.persistence.Table;
 @Table(name="LANE_TYPE")
 
 public class LaneType implements Serializable{
-	/**
-	 * LANE_TYPE table
-	 * LN_ID		column
-	 * LN_NAME	column
-	 * 
-	 */
 	private static final long serialVersionUID = -6640798122939665294L;
 	
 	@Id
-	@Column(name="LN_ID")
+	@Column(name="LT_ID")
 	private int ltId;
 	
-	@Column(name="LN_NAME")
+	@Column(name="LT_NAME")
 	private String ltName;
 	
 	public LaneType() {

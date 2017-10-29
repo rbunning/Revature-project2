@@ -12,9 +12,6 @@ import javax.persistence.Table;
 @Table(name="BOARD_USER_JOIN")
 public class BoardUserJoin implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6838882239390588980L;
 	
 	@Id
