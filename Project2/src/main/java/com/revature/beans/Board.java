@@ -22,6 +22,8 @@ public class Board implements Serializable {
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
 	Set<Story> story = new HashSet<Story>(); 	
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
+	Set<BoardUserJoin> boardUserJoin = new HashSet<BoardUserJoin>(); 	
 	
 	@Id
 	@Column(name="BOARD_ID")

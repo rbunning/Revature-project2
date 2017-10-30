@@ -12,11 +12,6 @@ import javax.persistence.Table;
 @Table(name="ROLE_TYPE")
 public class RoleType implements Serializable {
 
-	/**
-	 * ROLE_TYPE -table
-	 * RT_ID -column
-	 * RT_NAME -column
-	 */
 	private static final long serialVersionUID = 7877052733521207661L;
 	
 	@Id

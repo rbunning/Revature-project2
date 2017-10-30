@@ -1,14 +1,18 @@
 package com.revature.beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,16 +20,9 @@ import javax.persistence.Table;
 @Table(name="SCRUM_USER")
 public class ScrumUser implements Serializable {
 
-	/**
-	 * SCRUM_USER -table
-	 * SU_ID -column
-	 * RT_ID -column
-	 * SU_FN -column
-	 * SU_LN -column
-	 * SU_USERNAME -column
-	 * SU_PASSWORD -column
-	 */
 	private static final long serialVersionUID = -1738765309975039165L;
+	@OneToMany(mappedBy = "scrumUser", fetch = FetchType.EAGER) 
+	Set<BoardUserJoin> boardUserJoin = new HashSet<BoardUserJoin>(); 	
 	
 	@Id
 	@Column(name="SU_ID")
@@ -53,10 +50,16 @@ public class ScrumUser implements Serializable {
 		super();
 	}
 
-	public ScrumUser(int scrumUerId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
+	public ScrumUser(String scrumUserUsername, String scrumUserPassword) {
+		super();
+		this.scrumUserUsername = scrumUserUsername;
+		this.scrumUserPassword = scrumUserPassword;
+	}
+
+	public ScrumUser(int scrumUserId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
 			String scrumUserUsername, String scrumUserPassword) {
 		super();
-		this.scrumUserId = scrumUerId;
+		this.scrumUserId = scrumUserId;
 		this.roleType = roleType;
 		this.scrumUserFirstname = scrumUserFirstname;
 		this.scrumUserLastname = scrumUserLastname;
@@ -64,7 +67,7 @@ public class ScrumUser implements Serializable {
 		this.scrumUserPassword = scrumUserPassword;
 	}
 
-	public int getScrumUerId() {
+	public int getScrumUserId() {
 		return scrumUserId;
 	}
 
@@ -114,7 +117,7 @@ public class ScrumUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ScrumUser [scrumUerId=" + scrumUserId + ", RoleId=" + roleType + ", scrumUserFirstname="
+		return "ScrumUser [scrumUserId=" + scrumUserId + ", RoleId=" + roleType + ", scrumUserFirstname="
 				+ scrumUserFirstname + ", scrumUserLastname=" + scrumUserLastname + ", scrumUserUsername="
 				+ scrumUserUsername + ", scrumUserPassword=" + scrumUserPassword + "]";
 	}
