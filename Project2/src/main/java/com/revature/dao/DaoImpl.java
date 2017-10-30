@@ -12,12 +12,12 @@ import com.revature.beans.ScrumUser;
 import com.revature.beans.Task;
 
 @Repository
+@Transactional
 public class DaoImpl implements Dao {
 	@Autowired
 	SessionFactory sessionFactory;
 
 	// Get an Existing Scrum User from the DB
-	@Transactional
 	@Override
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -26,7 +26,6 @@ public class DaoImpl implements Dao {
 	}
 
 	// Get an Existing Scrum User from the DB (used for login)
-	@Transactional
 	@Override
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -36,7 +35,6 @@ public class DaoImpl implements Dao {
 	}
 
 	// Create a new Task and Save it to the DB
-	@Transactional
 	@Override
 	public void createTask(Task t) {
 		sessionFactory.getCurrentSession().save(t);
@@ -44,7 +42,6 @@ public class DaoImpl implements Dao {
 
 	// Get an Existing Task from the DB
 	// Can delete this if not needed
-	@Transactional
 	@Override
 	public Task getTaskById(Task t) {
 		Session session = sessionFactory.getCurrentSession();
