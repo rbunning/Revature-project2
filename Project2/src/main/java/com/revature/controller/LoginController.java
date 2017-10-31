@@ -21,19 +21,18 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ScrumUser> login(ScrumUser user, HttpServletRequest request) {
-		String username = request.getParameter("username").trim();
-		String password = request.getParameter("password").trim();
+		String username = user.getScrumUserUsername();
+		String password = user.getScrumUserPassword();
 		if (username != null && password != null && username != "" && password != "") {
-			ScrumUser su = new ScrumUser(username, password);
-			su = service.getScrumUserByUsername(su);
-			System.out.println(su);
-			if (su != null) {
+			user = service.getScrumUserByUsername(user);
+			if (user != null) {
 				// Store the valid user into the session
 				HttpSession session = request.getSession();
-				session.setAttribute("user", su);
-				return new ResponseEntity<ScrumUser>(su, HttpStatus.OK);
+				session.setAttribute("user", user);
+				return new ResponseEntity<ScrumUser>(user, HttpStatus.OK);
 			}
 		}
+		user = null;
 		return new ResponseEntity<ScrumUser>(user, HttpStatus.BAD_REQUEST);
 	}
 }
