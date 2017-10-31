@@ -52,14 +52,14 @@ public class ScrumUser implements Serializable {
 
 	public ScrumUser(String scrumUserUsername, String scrumUserPassword) {
 		super();
-		this.scrumUserUsername = scrumUserUsername;
-		this.scrumUserPassword = scrumUserPassword;
+		this.scrumUserUsername = scrumUserUsername.trim();
+		this.scrumUserPassword = scrumUserPassword.trim();
 	}
 
-	public ScrumUser(int scrumUserId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
+	public ScrumUser(int scrumUerId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
 			String scrumUserUsername, String scrumUserPassword) {
 		super();
-		this.scrumUserId = scrumUserId;
+		this.scrumUserId = scrumUerId;
 		this.roleType = roleType;
 		this.scrumUserFirstname = scrumUserFirstname;
 		this.scrumUserLastname = scrumUserLastname;
@@ -117,7 +117,7 @@ public class ScrumUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ScrumUser [scrumUserId=" + scrumUserId + ", RoleId=" + roleType + ", scrumUserFirstname="
+		return "ScrumUser [scrumUerId=" + scrumUserId + ", RoleId=" + roleType + ", scrumUserFirstname="
 				+ scrumUserFirstname + ", scrumUserLastname=" + scrumUserLastname + ", scrumUserUsername="
 				+ scrumUserUsername + ", scrumUserPassword=" + scrumUserPassword + "]";
 	}
