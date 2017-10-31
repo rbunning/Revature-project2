@@ -52,8 +52,8 @@ public class ScrumUser implements Serializable {
 
 	public ScrumUser(String scrumUserUsername, String scrumUserPassword) {
 		super();
-		this.scrumUserUsername = scrumUserUsername;
-		this.scrumUserPassword = scrumUserPassword;
+		this.scrumUserUsername = scrumUserUsername.trim();
+		this.scrumUserPassword = scrumUserPassword.trim();
 	}
 
 	public ScrumUser(int scrumUserId, RoleType roleType, String scrumUserFirstname, String scrumUserLastname,
