@@ -25,6 +25,9 @@ angular
 
 		.controller('homeController', function($scope) {
 			$scope.scrumUser = scrumUser;
+			console.log("before test: "+scrumUser);
+			console.log("test from homeCtrl: " + $scope.scrumUser);
+			
 		})
 
 		.controller(
@@ -43,6 +46,8 @@ angular
 						$http.post('login', data, config).then(
 								function(response) {
 									scrumUser = response.data;
+									console.log(scrumUser);
+									$scope.scrumUser = scrumUser;
 									$location.path('/homePage');
 								}, function(response) {
 									$scope.errorMessage = 'Incorrect username or password. Please try again.' ;
