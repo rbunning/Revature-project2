@@ -3,6 +3,7 @@ package com.revature.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
 import com.revature.dao.DaoImpl;
 
@@ -21,5 +22,11 @@ public class AppService {
 			loggedInUser = null;
 		}
 		return loggedInUser;
+	}
+
+	public Board addNewBoard(Board newBoard, ScrumUser sUser) {
+		newBoard = dao.addBoard(newBoard);
+		dao.addUserToBoard(newBoard, sUser);
+		return newBoard;
 	}
 }

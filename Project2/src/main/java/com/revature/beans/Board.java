@@ -31,13 +31,18 @@ public class Board implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="boardSeq") 
 	private int boardId;
 	@Column(name="BOARD_NAME")
-	private int boardName;
+	private String boardName;
 	
 	public Board() {
 		super();
 	}
 
-	public Board(int boardId, int boardName) {
+	public Board(String boardName) {
+		super();
+		this.boardName = boardName;
+	}
+
+	public Board(int boardId, String boardName) {
 		super();
 		this.boardId = boardId;
 		this.boardName = boardName;
@@ -51,11 +56,11 @@ public class Board implements Serializable {
 		this.boardId = boardId;
 	}
 
-	public int getBoardName() {
+	public String getBoardName() {
 		return boardName;
 	}
 
-	public void setBoardName(int boardName) {
+	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
 
