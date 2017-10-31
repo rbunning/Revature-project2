@@ -2,3 +2,4 @@
 <input data-ng-model="username" type="text" placeholder="username">
 <input data-ng-model="password" type="password" placeholder="password">
 <button data-ng-click="submit()" class="btn btn-default">Log in</button>
+<div class="alert alert-danger" ng-if="errorMessage">{{errorMessage}}</div> <br>
