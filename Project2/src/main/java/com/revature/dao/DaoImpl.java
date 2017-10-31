@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.beans.Board;
 import com.revature.beans.BoardUserJoin;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.beans.Task;
 
 @Repository
@@ -51,6 +52,7 @@ public class DaoImpl implements Dao {
 		return dbTask;
 	}
 
+	// Adds a new board.
 	@Override
 	public Board addBoard(Board newBoard) {
 		Session session = sessionFactory.getCurrentSession();
@@ -58,10 +60,18 @@ public class DaoImpl implements Dao {
 		return newBoard;
 	}
 
+	// Adds a new connection between a scrum user and a board.
 	@Override
 	public void addUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
 		BoardUserJoin buj = new BoardUserJoin(board,sUser);
 		session.save(buj);
+	}
+
+	// Adds a new Story.
+	@Override
+	public void addStory(Story story) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(story);
 	}
 }
