@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
@@ -21,7 +20,7 @@ public class NewBoardController {
 	
 	@Autowired
 	AppService service;
-	
+
 	@RequestMapping(value = "/newBoard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Board> addBoard(Board newBoard, HttpServletRequest request) {
 		HttpSession session = request.getSession();
