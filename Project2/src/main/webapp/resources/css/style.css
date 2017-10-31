@@ -2,23 +2,40 @@ body {
   background-color: #ddd;
 }
 
-/* .login-row {
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-} */
+body {
+	background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #F9FAF8 transparent !important;
+}
+
+.alert-info {
+	background-color: transparent !important;
+    opacity: 0.6;
+    border: 3px solid;
+}
+
+#usernameLabel, #passwordLabel, #submitLabel, #msgLabel{
+	font-family: 'Dosis', sans-serif;
+}
+
 .form-group {
     box-sizing: border-box;
     margin: 25px auto;
-    background-color: white;
-    padding: 150px 50px 50px 50px;
-    box-shadow: 1px 5px 2px #330000;
+    text-align: center;
+    background-color: #d3d3d3;
+    padding: 30px 50px 50px 50px;
+    box-shadow: 5px 5px 2px #330000;
     z-index: -1;
 }
 
 .form-group {
     margin-bottom: 15px;
+}
+
+#loginH1 {
+	font-family: 'Modak', cursive;
 }
 
 #logo {
