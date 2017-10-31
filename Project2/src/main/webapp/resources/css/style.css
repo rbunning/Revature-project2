@@ -1,0 +1,36 @@
+body {
+  background-color: #ddd;
+}
+
+/* .login-row {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+} */
+.form-group {
+    box-sizing: border-box;
+    margin: 25px auto;
+    background-color: white;
+    padding: 150px 50px 50px 50px;
+    box-shadow: 1px 5px 2px #330000;
+    z-index: -1;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#logo {
+    background-color: white;
+    background-size: 170px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    max-width:100%;
+    height: 192px;
+    width: 192px;
+    margin: 22px auto auto auto;
+    padding: 0px;
+    border: 5px solid white;
+    box-shadow: 1px 3px 2px grey;
+}
