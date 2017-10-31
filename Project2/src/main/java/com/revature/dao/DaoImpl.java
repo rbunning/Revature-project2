@@ -52,7 +52,7 @@ public class DaoImpl implements Dao {
 		return dbTask;
 	}
 
-	// Adds a new board.
+	// Adds a new board to the DB.
 	@Override
 	public Board addBoard(Board newBoard) {
 		Session session = sessionFactory.getCurrentSession();
@@ -60,7 +60,7 @@ public class DaoImpl implements Dao {
 		return newBoard;
 	}
 
-	// Adds a new connection between a scrum user and a board.
+	// Adds a new connection between a scrum user and a board to the DB.
 	@Override
 	public void addUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -68,9 +68,9 @@ public class DaoImpl implements Dao {
 		session.save(buj);
 	}
 
-	// Adds a new Story.
+	// Adds a new Story to the DB.
 	@Override
-	public void addStory(Story story) {
+	public void createStory(Story story) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(story);
 	}

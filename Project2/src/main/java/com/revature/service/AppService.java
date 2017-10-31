@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.dao.DaoImpl;
 
 @Service
@@ -29,4 +30,9 @@ public class AppService {
 		dao.addUserToBoard(newBoard, sUser);
 		return newBoard;
 	}
+	
+	public void addNewStory(Story story) {
+		dao.createStory(story);
+	}
+	
 }

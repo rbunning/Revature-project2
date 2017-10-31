@@ -14,7 +14,7 @@ public interface Dao {
 	
 	public void createTask(Task t);
 	
-	public void addStory(Story story);
+	public void createStory(Story story);
 
 	// READ
 	public ScrumUser getScrumUserById(ScrumUser sUser);
