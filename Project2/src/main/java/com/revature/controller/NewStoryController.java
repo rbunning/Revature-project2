@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.service.AppService;
 
 @Controller
@@ -27,11 +27,8 @@ public class NewStoryController {
 		return new ModelAndView("/resources/features/addStory.html");
 	}
 	
-	@RequestMapping(value = "/newBoard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Board> addBoard(Board newBoard, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
-		newBoard = service.addNewBoard(newBoard, sUser);
-		return new ResponseEntity<Board>(newBoard, HttpStatus.OK);
+	@RequestMapping(value = "/newStory", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void addBoard(Story newStory, HttpServletRequest request) {
+		service.addNewStory(newStory);
 	}
 }
