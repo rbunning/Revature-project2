@@ -23,14 +23,8 @@ angular
 		.controller('indexController', function() {
 		})
 
-		.controller('homeController', function($scope, $location) {
+		.controller('homeController', function($scope) {
 			$scope.scrumUser = scrumUser;
-			if($scope.scrumUser.roleId.roleId == 2 ){
-				$scope.isScrumMaster = true;
-			}
-			$scope.addABoard = function() {
-				$location.path('/addBoard');
-			}
 		})
 
 		.controller(
@@ -49,7 +43,6 @@ angular
 						$http.post('login', data, config).then(
 								function(response) {
 									scrumUser = response.data;
-									$scope.scrumUser = scrumUser;
 									$location.path('/homePage');
 								}, function(response) {
 									$scope.errorMessage = 'Incorrect username or password. Please try again.' ;
@@ -81,7 +74,3 @@ angular
 			};
 
 		})
-
-
-
-
