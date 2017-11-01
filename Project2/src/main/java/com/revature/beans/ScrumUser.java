@@ -1,49 +1,65 @@
 package com.revature.beans;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="SCRUM_USER")
+@Table(name = "SCRUM_USER")
 public class ScrumUser implements Serializable {
 
 	private static final long serialVersionUID = -1738765309975039165L;
-	@OneToMany(mappedBy = "scrumUser", fetch = FetchType.EAGER) 
-	Set<BoardUserJoin> boardUserJoin = new HashSet<BoardUserJoin>(); 	
-	
+	@ManyToMany
+	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "su_id", referencedColumnName = "su_id"), inverseJoinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"))
+	private Set<Board> boards;
+
+	public Set<Board> getBoards() {
+		return boards;
+	}
+
+	public void setBoards(Set<Board> boards) {
+		this.boards = boards;
+	}
+
+	public RoleType getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(RoleType roleType) {
+		this.roleType = roleType;
+	}
+
 	@Id
-	@Column(name="SU_ID")
-	@SequenceGenerator(allocationSize=1, sequenceName = "SCRUM_USER_SEQ", name = "SU_SEQ" )
+	@Column(name = "SU_ID")
+	@SequenceGenerator(allocationSize = 1, sequenceName = "SCRUM_USER_SEQ", name = "SU_SEQ")
 	@GeneratedValue(generator = "SU_SEQ", strategy = GenerationType.SEQUENCE)
 	private int scrumUserId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="RT_ID")
+	@JoinColumn(name = "RT_ID")
 	private RoleType roleType;
-	
-	@Column(name="SU_FN")
+
+	@Column(name = "SU_FN")
 	private String scrumUserFirstname;
-	
-	@Column(name="SU_LN")
+
+	@Column(name = "SU_LN")
 	private String scrumUserLastname;
 
-	@Column(name="SU_USERNAME")
+	@Column(name = "SU_USERNAME")
 	private String scrumUserUsername;
-	
-	@Column(name="SU_PASSWORD")
+
+	@Column(name = "SU_PASSWORD")
 	private String scrumUserPassword;
 
 	public ScrumUser() {

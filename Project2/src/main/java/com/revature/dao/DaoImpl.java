@@ -1,15 +1,20 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
-import com.revature.beans.BoardUserJoin;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Task;
 
@@ -33,6 +38,8 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		ScrumUser dbUser = (ScrumUser) session.createCriteria(ScrumUser.class)
 				.add(Restrictions.eq("scrumUserUsername", sUser.getScrumUserUsername())).uniqueResult();
+		//force loading of boards
+		dbUser.getBoards().size();
 		return dbUser;
 	}
 
@@ -61,7 +68,19 @@ public class DaoImpl implements Dao {
 	@Override
 	public void addUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
-		BoardUserJoin buj = new BoardUserJoin(board,sUser);
-		session.save(buj);
+		//force board list to load
+		int boardListSize = sUser.getBoards().size();
+		sUser.getBoards().add(board);
+		session.update(sUser);
+	}
+
+	@Override
+	public List<Board> getBoardList(ScrumUser sUser) {
+		Session session = sessionFactory.getCurrentSession();
+		//force board list to load
+		int boardListSize = sUser.getBoards().size();
+		List<Board> boardList = new ArrayList<Board>();
+		boardList.addAll((List<Board>) sUser.getBoards());
+		return boardList;
 	}
 }
