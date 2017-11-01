@@ -49,6 +49,7 @@ angular
 						$http.post('login', data, config).then(
 								function(response) {
 									scrumUser = response.data;
+									$scope.scrumUser = scrumUser;
 									$location.path('/homePage');
 								}, function(response) {
 									$scope.errorMessage = 'Incorrect username or password. Please try again.' ;
