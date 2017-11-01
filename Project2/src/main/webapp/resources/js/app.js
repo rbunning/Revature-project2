@@ -12,6 +12,9 @@ angular
 			}).when("/homePage", {
 				templateUrl : "resources/features/homePage.html",
 				controller : "homeController"
+			}).when("/addBoard", {
+				templateUrl : "resources/features/addBoard.html",
+				controller : "addBoardCtrl"
 			}).otherwise({
 				redirectTo : '/'
 			})
@@ -22,6 +25,9 @@ angular
 
 		.controller('homeController', function($scope) {
 			$scope.scrumUser = scrumUser;
+			console.log("before test: "+scrumUser);
+			console.log("test from homeCtrl: " + $scope.scrumUser);
+			
 		})
 
 		.controller(
@@ -29,8 +35,8 @@ angular
 				function($scope, $http, $location) {
 					$scope.submit = function() {
 						var data = $.param({
-							username : $scope.username,
-							password : $scope.password
+							scrumUserUsername : $scope.username,
+							scrumUserPassword : $scope.password
 						});
 						var config = {
 							headers : {
@@ -39,8 +45,9 @@ angular
 						}
 						$http.post('login', data, config).then(
 								function(response) {
-									console.log(response.data);
 									scrumUser = response.data;
+									console.log(scrumUser);
+									$scope.scrumUser = scrumUser;
 									$location.path('/homePage');
 								}, function(response) {
 									$scope.errorMessage = 'Incorrect username or password. Please try again.' ;
@@ -49,4 +56,26 @@ angular
 								});
 					};
 
+				})
+
+.controller(
+		"addBoardCtrl",
+		function($scope, $http, $location) {
+			$scope.submit = function() {
+				var data = $.param({
+					boardName : $scope.boardname
 				});
+				var config = {
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+					}
+				}
+				$http.post('newBoard', data, config).then(
+						function(response) {
+							$location.path('/homePage');
+						}, function(response) {
+							console.log(response);
+						});
+			};
+
+		})

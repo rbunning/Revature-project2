@@ -1,0 +1,53 @@
+body {
+  background-color: #ddd;
+}
+
+body {
+	background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #F9FAF8 transparent !important;
+}
+
+.alert-info {
+	background-color: transparent !important;
+    opacity: 0.6;
+    border: 3px solid;
+}
+
+#usernameLabel, #passwordLabel, #submitLabel, #msgLabel{
+	font-family: 'Dosis', sans-serif;
+}
+
+.form-group {
+    box-sizing: border-box;
+    margin: 25px auto;
+    text-align: center;
+    background-color: #d3d3d3;
+    padding: 30px 50px 50px 50px;
+    box-shadow: 5px 5px 2px #330000;
+    z-index: -1;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#loginH1 {
+	font-family: 'Modak', cursive;
+}
+
+#logo {
+    background-color: white;
+    background-size: 170px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    max-width:100%;
+    height: 192px;
+    width: 192px;
+    margin: 22px auto auto auto;
+    padding: 0px;
+    border: 5px solid white;
+    box-shadow: 1px 3px 2px grey;
+}
