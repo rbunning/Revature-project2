@@ -22,7 +22,7 @@ public class Board implements Serializable {
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
 	Set<Story> story = new HashSet<Story>(); 	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy = "board") 
 	Set<BoardUserJoin> boardUserJoin = new HashSet<BoardUserJoin>(); 	
 	
 	@Id
