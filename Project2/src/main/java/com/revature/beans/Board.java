@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "BOARD")
 public class Board implements Serializable {
@@ -25,8 +27,9 @@ public class Board implements Serializable {
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	private Set<Story> story = new HashSet<Story>();
+	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "boardId", referencedColumnName = "board_id"), inverseJoinColumns = @JoinColumn(name = "scrumUserId", referencedColumnName = "su_id"))
+	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"), inverseJoinColumns = @JoinColumn(name = "su_id", referencedColumnName = "su_id"))
 	private Set<ScrumUser> scrumUsers;
 
 	@Id
