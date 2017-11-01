@@ -21,7 +21,7 @@ public class ScrumUser implements Serializable {
 
 	private static final long serialVersionUID = -1738765309975039165L;
 	@ManyToMany
-	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "scrumUserId", referencedColumnName = "su_id"), inverseJoinColumns = @JoinColumn(name = "boardId", referencedColumnName = "board_id"))
+	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "su_id", referencedColumnName = "su_id"), inverseJoinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"))
 	private Set<Board> boards;
 
 	public Set<Board> getBoards() {

@@ -38,6 +38,8 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		ScrumUser dbUser = (ScrumUser) session.createCriteria(ScrumUser.class)
 				.add(Restrictions.eq("scrumUserUsername", sUser.getScrumUserUsername())).uniqueResult();
+		//force loading of boards
+		dbUser.getBoards().size();
 		return dbUser;
 	}
 
