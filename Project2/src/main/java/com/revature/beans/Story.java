@@ -23,17 +23,17 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="STORY")
+@Table(name = "STORY")
 public class Story implements Serializable {
 
 	private static final long serialVersionUID = 3437652641718304355L;
-	@OneToMany(mappedBy = "story", fetch = FetchType.EAGER) 
-	Set<Task> task = new HashSet<Task>(); 	
+	@OneToMany(mappedBy = "story", fetch = FetchType.EAGER)
+	Set<Task> task = new HashSet<Task>();
 
 	@Id
-	@Column(name="STORY_ID")
-	@SequenceGenerator(name="storySeq",sequenceName="story_seq", allocationSize=1)        
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="storySeq") 
+	@Column(name = "STORY_ID")
+	@SequenceGenerator(name = "storySeq", sequenceName = "story_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "storySeq")
 	private int storyId;
 	@ManyToOne
 	@JoinColumn(name = "BOARD_ID")
@@ -41,17 +41,28 @@ public class Story implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "LT_ID")
 	private LaneType laneType;
-	@Column(name="STORY_NAME")
+	@Column(name = "STORY_NAME")
 	private String storyName;
-	@Column(name="STORY_POINTS")
+	@Column(name = "STORY_POINTS")
 	private int storyPoints;
-	@Column(name="STORY_DESC")
+	@Column(name = "STORY_DESC")
 	private String storyDesc;
-	@Column(name="LAST_MOVE_DATE")
+	@Column(name = "LAST_MOVE_DATE")
 	private Date lastMoveDate;
 
 	public Story() {
 		super();
+	}
+
+	public Story(Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
+			Date lastMoveDate) {
+		super();
+		this.board = board;
+		this.laneType = laneType;
+		this.storyName = storyName;
+		this.storyPoints = storyPoints;
+		this.storyDesc = storyDesc;
+		this.lastMoveDate = lastMoveDate;
 	}
 
 	public Story(int storyId, Board board, LaneType laneType, String storyName, int storyPoints, String storyDesc,
