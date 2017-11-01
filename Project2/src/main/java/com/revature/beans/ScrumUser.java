@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class ScrumUser implements Serializable {
 
 	private static final long serialVersionUID = -1738765309975039165L;
-	@OneToMany(mappedBy = "scrumUser", fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy = "scrumUser") 
 	Set<BoardUserJoin> boardUserJoin = new HashSet<BoardUserJoin>(); 	
 	
 	@Id
