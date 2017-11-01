@@ -17,6 +17,7 @@ import com.revature.service.AppService;
 
 @RestController
 public class NewBoardController {
+	
 	@Autowired
 	AppService service;
 

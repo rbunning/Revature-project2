@@ -22,6 +22,6 @@ public class AppAspect {
 	@Before("within(com.revature.service.AppService)")
 	public void adviseForAllServiceMethods(JoinPoint jp) {
 		log = Logger.getLogger(jp.getClass().getName());
-		log.info("Before the dao method: " + jp.getSignature().getName());
+		log.info("Before the service method: " + jp.getSignature().getName());
 	}
 }
