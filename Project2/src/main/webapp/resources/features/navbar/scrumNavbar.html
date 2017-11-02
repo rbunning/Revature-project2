@@ -13,18 +13,11 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a data-ng-click="listBoards()">List Boards</a></li>
-						<li><a data-ng-show="isScrumMaster"
-							data-ng-click="addABoard()">Add a Board</a></li>
-						<li><a data-toggle="collapse" data-target=".navbar-collapse"
-							ui-sref="main.userProfile">Add a User</a></li>
-
-						<!-- Make condition in app.js called isScrumMaster -->
-						<li class="dropdown" data-ng-show="isScrumMaster"
-							ng-click="addAUser()"><a class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">Admin<span class="caret"></span></a>
-
+						<li><a onmouseover="" style="cursor: pointer;"  data-ng-click="listBoards()">List Boards</a></li>
+						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="addABoard()">Add a Board</a></li>
+						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="">Add a Story</a></li>
+						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="">Add a User</a></li>
+					
 							<ul class="dropdown-menu">
 								<li><a data-toggle="collapse"
 									data-target=".navbar-collapse" ui-sref="main.adminPoi">admin1</a></li>
@@ -32,11 +25,7 @@
 									data-target=".navbar-collapse" ui-sref="main.adminUsers">admin2</a></li>
 
 							</ul></li>
-						<!-- Change this to hide if isScrumMaster is false -->
-						<li ng-hide="isUserValid"><a data-toggle="collapse"
-							ng-click="isUserValid = !isUserValid">Add a Story</a></li>
-						<li ng-hide="!isUserValid"><a data-toggle="collapse"
-							ng-click="isUserValid = !isUserValid">Logout</a></li>
+						<li><a href="/Project2/">Logout</a></li>
 					</ul>
 				</div>
 			</div>
