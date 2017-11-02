@@ -1,5 +1,7 @@
 package com.revature.dao;
 
+import java.util.List;
+
 import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
@@ -22,7 +24,9 @@ public interface Dao {
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser);
 
 	public Task getTaskById(Task t);
-
+  
+  public List<Board> getBoardList(ScrumUser sUser);
+  
 	// UPDATE
 
 	// DELETE
