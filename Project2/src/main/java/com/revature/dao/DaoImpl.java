@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.beans.Task;
 
 @Repository
@@ -24,7 +25,7 @@ public class DaoImpl implements Dao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	// Get an Existing Scrum User from the DB
+	// Get an existing Scrum User from the DB.
 	@Override
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -32,7 +33,7 @@ public class DaoImpl implements Dao {
 		return dbUser;
 	}
 
-	// Get an Existing Scrum User from the DB (used for login)
+	// Get an existing Scrum User from the DB (used for login).
 	@Override
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -43,13 +44,13 @@ public class DaoImpl implements Dao {
 		return dbUser;
 	}
 
-	// Create a new Task and Save it to the DB
+	// Creates a new Task and save it to the DB.
 	@Override
 	public void createTask(Task t) {
 		sessionFactory.getCurrentSession().save(t);
 	}
 
-	// Get an Existing Task from the DB
+	// Get an existing Task from the DB.
 	// Can delete this if not needed
 	@Override
 	public Task getTaskById(Task t) {
@@ -58,15 +59,17 @@ public class DaoImpl implements Dao {
 		return dbTask;
 	}
 
+	// Creates a new Board and save it to the DB.
 	@Override
-	public Board addBoard(Board newBoard) {
+	public Board createBoard(Board newBoard) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(newBoard);
 		return newBoard;
 	}
 
+	// Creates a new join between the Board and Scrum User and save it to the DB.
 	@Override
-	public void addUserToBoard(Board board, ScrumUser sUser) {
+	public void createUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
 		//force board list to load
 		int boardListSize = sUser.getBoards().size();
@@ -82,5 +85,12 @@ public class DaoImpl implements Dao {
 		List<Board> boardList = new ArrayList<Board>();
 		boardList.addAll((List<Board>) sUser.getBoards());
 		return boardList;
+	}
+
+	// Creates a new Story and save it to the DB.
+	@Override
+	public void createStory(Story s) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(s);
 	}
 }
