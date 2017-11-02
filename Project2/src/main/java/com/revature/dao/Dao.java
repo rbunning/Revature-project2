@@ -15,7 +15,7 @@ public interface Dao {
 	public void createUserToBoard(Board board, ScrumUser sUser);
 
 	public void createTask(Task t);
-	
+
 	public void createStory(Story s);
 
 	// READ
@@ -24,9 +24,9 @@ public interface Dao {
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser);
 
 	public Task getTaskById(Task t);
-  
-  public List<Board> getBoardList(ScrumUser sUser);
-  
+
+	public List<Board> getBoardList(ScrumUser sUser);
+
 	// UPDATE
 
 	// DELETE

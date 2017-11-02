@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,13 @@ public class AppService {
 	
 	public void addNewStory(Story newStory) {
 		dao.createStory(newStory);
+	}
+	
+	public void addUserToBoard(Board board, ScrumUser sUser) {
+		dao.createUserToBoard(board, sUser);
+	}
+	
+	public List<Board> getBoardList(ScrumUser sUser) {
+		return dao.getBoardList(sUser);
 	}
 }
