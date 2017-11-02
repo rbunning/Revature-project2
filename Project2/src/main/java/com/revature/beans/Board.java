@@ -27,10 +27,10 @@ public class Board implements Serializable {
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	private Set<Story> story = new HashSet<Story>();
-	@JsonIgnore
+	@JsonIgnore//
 	@ManyToMany
 	@JoinTable(name = "BOARD_USER_JOIN", joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"), inverseJoinColumns = @JoinColumn(name = "su_id", referencedColumnName = "su_id"))
-	private Set<ScrumUser> scrumUsers;
+	private Set<ScrumUser> scrumUsers; //
 
 	@Id
 	@Column(name = "BOARD_ID")
