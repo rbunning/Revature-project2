@@ -1,8 +1,8 @@
 <div data-ng-controller="navbarController">
 	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container-fluid">
+		<div class="container-fluid" >
 
-			<div class="row">
+			<div class="row" >
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
 						data-target="#myNavbar">
@@ -21,12 +21,23 @@
  +				          </ul>
  +				        </li>
  +				      </ul>
+
 					<ul class="nav navbar-nav navbar-right">
 						<li><a onmouseover="" style="cursor: pointer;"  data-ng-click="listBoards()">List Boards</a></li>
 						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="addABoard()">Add a Board</a></li>
 						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="">Add a Story</a></li>
 						<li><a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="">Add a User</a></li>
+
 						<li><a onmouseover="" style="cursor: pointer;" data-ng-click="logout()">Logout</a></li>
+							<ul class="dropdown-menu">
+								<li><a data-toggle="collapse"
+									data-target=".navbar-collapse" ui-sref="main.adminPoi">admin1</a></li>
+								<li><a data-toggle="collapse"
+									data-target=".navbar-collapse" ui-sref="main.adminUsers">admin2</a></li>
+
+							</ul></li>
+
+						<li><a href="/Project2/">Logout</a></li>
 					</ul>
 				</div>
 			</div>
