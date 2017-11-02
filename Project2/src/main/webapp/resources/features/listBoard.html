@@ -1,4 +1,5 @@
-<div ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
-<div class="item" ng-repeat="board in boards" >
-	<label>{{board.boardName}}</label>
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+<label>Board ID&emsp;&emsp;Board Name</label>
+<div class="item" data-ng-repeat="board in boards" >
+	<label>{{board.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{board.boardName}}</label>
 </div>
