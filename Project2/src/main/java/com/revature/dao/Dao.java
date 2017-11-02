@@ -14,8 +14,10 @@ public interface Dao {
 
 	public void createUserToBoard(Board board, ScrumUser sUser);
 
-	public void createTask(Task t);
+	public Task createTask(Task t);
 
+	public void createTaskToStory(Story story, Task task);
+	
 	public void createStory(Story s);
 
 	// READ

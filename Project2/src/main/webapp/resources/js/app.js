@@ -25,8 +25,7 @@ angular
 
 		.controller('indexController', function() {
 		})
-
-		.controller('listBoardCtrl', function($scope, $http, $location) {
+		.controller('navbarController', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			if ($scope.scrumUser.roleId.roleId == 2) {
 				$scope.isScrumMaster = true;
@@ -40,6 +39,19 @@ angular
 			$scope.home = function() {
 				$location.path('/homePage');
 			}
+			$scope.logout = function() {
+				$location.path('/');
+			}
+			$http.get('listBoards').then(
+					function(response) {
+						$scope.boards = response.data;
+					}, function(response) {
+						console.log(response);
+					});
+		})
+
+		.controller('listBoardCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(
 					function(response) {
 						$scope.boards = response.data;
@@ -50,18 +62,6 @@ angular
 
 		.controller('homeController', function($scope, $location) {
 			$scope.scrumUser = scrumUser;
-			if ($scope.scrumUser.roleId.roleId == 2) {
-				$scope.isScrumMaster = true;
-			}
-			$scope.addABoard = function() {
-				$location.path('/addBoard');
-			}
-			$scope.listBoards = function() {
-				$location.path('/listBoard');
-			}
-			$scope.home = function() {
-				$location.path('/homePage');
-			}
 		})
 
 		.controller("loginCtrl", function($scope, $http, $location) {
@@ -91,18 +91,6 @@ angular
 
 		.controller("addBoardCtrl",	function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
-			if ($scope.scrumUser.roleId.roleId == 2) {
-				$scope.isScrumMaster = true;
-			}
-			$scope.addABoard = function() {
-				$location.path('/addBoard');
-			}
-			$scope.listBoards = function() {
-				$location.path('/listBoard');
-			}
-			$scope.home = function() {
-				$location.path('/homePage');
-			}
 			$scope.submit = function() {
 				var data = $.param({
 					boardName : $scope.boardname
