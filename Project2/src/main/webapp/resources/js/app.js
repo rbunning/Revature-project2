@@ -27,6 +27,19 @@ angular
 		})
 
 		.controller('listBoardCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			if ($scope.scrumUser.roleId.roleId == 2) {
+				$scope.isScrumMaster = true;
+			}
+			$scope.addABoard = function() {
+				$location.path('/addBoard');
+			}
+			$scope.listBoards = function() {
+				$location.path('/listBoard');
+			}
+			$scope.home = function() {
+				$location.path('/homePage');
+			}
 			$http.get('listBoards').then(
 					function(response) {
 						$scope.boards = response.data;
@@ -77,21 +90,34 @@ angular
 		})
 
 		.controller("addBoardCtrl",	function($scope, $http, $location) {
-				$scope.submit = function() {
-					var data = $.param({
-						boardName : $scope.boardname
-					});
-					var config = {
-						headers : {
-							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
-						}
+			$scope.scrumUser = scrumUser;
+			if ($scope.scrumUser.roleId.roleId == 2) {
+				$scope.isScrumMaster = true;
+			}
+			$scope.addABoard = function() {
+				$location.path('/addBoard');
+			}
+			$scope.listBoards = function() {
+				$location.path('/listBoard');
+			}
+			$scope.home = function() {
+				$location.path('/homePage');
+			}
+			$scope.submit = function() {
+				var data = $.param({
+					boardName : $scope.boardname
+				});
+				var config = {
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 					}
-					$http.post('newBoard', data, config).then(
-							function(response) {
-								$location.path('/homePage');
-							}, function(response) {
-								console.log(response);
-							});
-				};
+				}
+				$http.post('newBoard', data, config).then(
+						function(response) {
+							$location.path('/homePage');
+						}, function(response) {
+							console.log(response);
+						});
+			};
 
-			})
+		})
