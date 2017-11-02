@@ -44,8 +44,18 @@ public class DaoImpl implements Dao {
 
 	// Creates a new Task and save it to the DB.
 	@Override
-	public void createTask(Task t) {
-		sessionFactory.getCurrentSession().save(t);
+	public Task createTask(Task t) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(t);
+		return t;
+	}
+
+	@Override
+	public void createTaskToStory(Story story, Task task) {
+		Session session = sessionFactory.getCurrentSession();
+		//setting story to update the story id
+		task.setStory(story);
+		session.update(task);
 	}
 
 	// Get an existing Task from the DB.
@@ -92,4 +102,6 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(s);
 	}
+
+	
 }
