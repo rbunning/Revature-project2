@@ -2,20 +2,19 @@ package com.revature.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.beans.Task;
 
 @Repository
@@ -24,7 +23,7 @@ public class DaoImpl implements Dao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	// Get an Existing Scrum User from the DB
+	// Get an existing Scrum User from the DB.
 	@Override
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
@@ -32,24 +31,34 @@ public class DaoImpl implements Dao {
 		return dbUser;
 	}
 
-	// Get an Existing Scrum User from the DB (used for login)
+	// Get an existing Scrum User from the DB (used for login).
 	@Override
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
 		ScrumUser dbUser = (ScrumUser) session.createCriteria(ScrumUser.class)
 				.add(Restrictions.eq("scrumUserUsername", sUser.getScrumUserUsername())).uniqueResult();
-		//force loading of boards
+		// force loading of boards
 		dbUser.getBoards().size();
 		return dbUser;
 	}
 
-	// Create a new Task and Save it to the DB
+	// Creates a new Task and save it to the DB.
 	@Override
-	public void createTask(Task t) {
-		sessionFactory.getCurrentSession().save(t);
+	public Task createTask(Task t) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(t);
+		return t;
 	}
 
-	// Get an Existing Task from the DB
+	@Override
+	public void createTaskToStory(Story story, Task task) {
+		Session session = sessionFactory.getCurrentSession();
+		//setting story to update the story id
+		task.setStory(story);
+		session.update(task);
+	}
+
+	// Get an existing Task from the DB.
 	// Can delete this if not needed
 	@Override
 	public Task getTaskById(Task t) {
@@ -58,17 +67,19 @@ public class DaoImpl implements Dao {
 		return dbTask;
 	}
 
+	// Creates a new Board and save it to the DB.
 	@Override
-	public Board addBoard(Board newBoard) {
+	public Board createBoard(Board newBoard) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(newBoard);
 		return newBoard;
 	}
 
+	// Creates a new join between the Board and Scrum User and save it to the DB.
 	@Override
-	public void addUserToBoard(Board board, ScrumUser sUser) {
+	public void createUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
-		//force board list to load
+		// force board list to load
 		int boardListSize = sUser.getBoards().size();
 		sUser.getBoards().add(board);
 		session.update(sUser);
@@ -77,10 +88,54 @@ public class DaoImpl implements Dao {
 	@Override
 	public List<Board> getBoardList(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
-		//force board list to load
+		// force board list to load
 		int boardListSize = sUser.getBoards().size();
 		List<Board> boardList = new ArrayList<Board>();
-		boardList.addAll((List<Board>) sUser.getBoards());
+		Set<Board> boardSet = sUser.getBoards();
+		boardList.addAll(boardSet);
 		return boardList;
+	}
+
+	// Creates a new Story and save it to the DB.
+	@Override
+	public void createStory(Story s) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(s);
+	}
+
+	@Override
+	public Board getBoardById(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		board = (Board) session.get(Board.class, board.getBoardId());
+		board.getStory().size();
+		for(Story s : board.getStory()) {
+			s.getTask().size();
+		}
+		return board;
+	}
+
+	@Override
+	public List<ScrumUser> getUserList(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		board = (Board) session.get(Board.class, board.getBoardId());
+		board.getScrumUsers().size();
+		List<ScrumUser> userList = new ArrayList<ScrumUser>();
+		Set<ScrumUser> userSet = board.getScrumUsers();
+		for (ScrumUser su : userSet) {
+			su.getBoards().size();
+		}
+		userList.addAll(userSet);
+		return userList;
+	}
+
+	@Override
+	public List<ScrumUser> getAllUserList() {
+		Session session = sessionFactory.getCurrentSession();
+		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
+		for (ScrumUser su : userList) {
+			su.getBoards().size();
+		}
+
+		return userList;
 	}
 }

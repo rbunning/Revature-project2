@@ -1,11 +1,6 @@
 package com.revature.beans;
 
 import java.io.Serializable;
-/**
- * 
- * @author jay
- *
- */
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "STORY")
 public class Story implements Serializable {
@@ -35,18 +32,25 @@ public class Story implements Serializable {
 	@SequenceGenerator(name = "storySeq", sequenceName = "story_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "storySeq")
 	private int storyId;
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "BOARD_ID")
 	private Board board;
+
 	@ManyToOne
 	@JoinColumn(name = "LT_ID")
 	private LaneType laneType;
+
 	@Column(name = "STORY_NAME")
 	private String storyName;
+
 	@Column(name = "STORY_POINTS")
 	private int storyPoints;
+
 	@Column(name = "STORY_DESC")
 	private String storyDesc;
+
 	@Column(name = "LAST_MOVE_DATE")
 	private Date lastMoveDate;
 
@@ -79,6 +83,14 @@ public class Story implements Serializable {
 
 	public int getStory() {
 		return storyId;
+	}
+
+	public Set<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(Set<Task> task) {
+		this.task = task;
 	}
 
 	public void setStory(int storyId) {

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="TASK")
 
@@ -25,6 +27,7 @@ public class Task implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="taskSeq")
 	private int taskId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="STORY_ID")
 	private Story story;
