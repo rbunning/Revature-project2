@@ -3,26 +3,6 @@
 </head>
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
 
-
-<!-- <label>Board ID&emsp;&emsp;Board Name</label><p>
-<label>{{boardDetail.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{boardDetail.boardName}}</label>
-<p>
-<label>Story ID&emsp;&emsp;Story Name&emsp;&emsp;&emsp;&emsp;Points&emsp;&emsp;Lane&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Description</label>
-<div class="item" data-ng-repeat="story in boardDetail.story" >
-	<label>{{story.story}}&emsp;&emsp;&emsp;
-		   {{story.storyName}}&emsp;&emsp;&emsp;
-		   {{story.storyPoints}}&emsp;&emsp;&emsp;&emsp;
-		   {{story.laneType.ltName}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
-		   {{story.storyDesc}}
-	</label><p>
-		<label>&emsp;&emsp;&emsp;Task ID&emsp;&emsp;&emsp;&emsp;Description</label>
-		<div class="item" data-ng-repeat="t in story.task" >
-				<label>&emsp;&emsp;&emsp;{{t.taskId}}&emsp;&emsp;&emsp;
-				   {{t.description}}
-				</label><p>
-		</div>
-</div> -->
-
 <div id="displayEntries">
 	
 	<table class="table table-bordered table-hover">
@@ -73,4 +53,41 @@
 					
 		</tbody>
 	</table>
+	Board Users
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	All Users
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	
 </div>
