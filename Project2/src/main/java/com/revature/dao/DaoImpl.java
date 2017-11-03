@@ -103,5 +103,14 @@ public class DaoImpl implements Dao {
 		session.save(s);
 	}
 
-	
+	@Override
+	public Board getBoardById(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		board = (Board) session.get(Board.class, board.getBoardId());
+		board.getStory().size();
+		for(Story s : board.getStory()) {
+			s.getTask().size();
+		}
+		return board;
+	}
 }

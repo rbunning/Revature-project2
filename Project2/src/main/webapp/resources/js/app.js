@@ -1,6 +1,7 @@
 window.onload = function() {
 }
 var scrumUser = {};
+var boardStuff = {};
 
 angular
 		.module('jabrApp', [ 'ngRoute' ])
@@ -18,6 +19,9 @@ angular
 			}).when("/listBoard", {
 				templateUrl : "resources/features/listBoard.html",
 				controller : "listBoardCtrl"
+			}).when("/boardDetail", {
+				templateUrl : "resources/features/boardDetails.html",
+				controller : "boardDetailsCtrl"
 			}).otherwise({
 				redirectTo : '/'
 			})
@@ -25,6 +29,7 @@ angular
 
 		.controller('indexController', function() {
 		})
+
 		.controller('navbarController', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			if ($scope.scrumUser.roleId.roleId == 2) {
@@ -42,6 +47,9 @@ angular
 			$scope.logout = function() {
 				$location.path('/');
 			}
+			$scope.boardDetails = function(boardId) {
+				$location.path('/boardDetail');
+			}
 			$http.get('listBoards').then(
 					function(response) {
 						$scope.boards = response.data;
@@ -50,6 +58,33 @@ angular
 					});
 		})
 
+		.controller('boardDetailsCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			var data = $.param({
+				boardId : '2' //$scope.boardid
+			});
+			var config = {
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			}
+			//need a separate call to get user list - not part of board to prevent JSON infinite recursion
+//			$http.post('boardUsers', data, config).then(
+//					function(response) {
+//						$scope.users = response.data;
+//					}, function(response) {
+//						console.log(response);
+//					});
+			//gets all the details for this board except users
+			$http.post('boardDetails', data, config).then(
+					function(response) {
+						$scope.boardDetail = response.data;
+						boardStuff = response.data;
+					}, function(response) {
+						console.log(response);
+					});
+		})
+		
 		.controller('listBoardCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(
