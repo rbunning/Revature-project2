@@ -113,4 +113,29 @@ public class DaoImpl implements Dao {
 		}
 		return board;
 	}
+
+	@Override
+	public List<ScrumUser> getUserList(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		board = (Board) session.get(Board.class, board.getBoardId());
+		board.getScrumUsers().size();
+		List<ScrumUser> userList = new ArrayList<ScrumUser>();
+		Set<ScrumUser> userSet = board.getScrumUsers();
+		for (ScrumUser su : userSet) {
+			su.getBoards().size();
+		}
+		userList.addAll(userSet);
+		return userList;
+	}
+
+	@Override
+	public List<ScrumUser> getAllUserList() {
+		Session session = sessionFactory.getCurrentSession();
+		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
+		for (ScrumUser su : userList) {
+			su.getBoards().size();
+		}
+
+		return userList;
+	}
 }

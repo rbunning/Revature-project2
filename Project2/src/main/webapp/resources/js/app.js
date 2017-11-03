@@ -41,9 +41,6 @@ angular
 			if ($scope.scrumUser.roleId.roleId == 2) {
 				$scope.isScrumMaster = true;
 			}
-			$scope.boardDropDown = function() {
-				$location.path('/boardDropDown');
-			}
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
 			}
@@ -59,14 +56,12 @@ angular
 			$scope.boardDetails = function(boardId) {
 				$location.path('/boardDetail');
 			}
-			$scope.boardInfo = function() {
-				$location.path('/boardInfo')
-			}
-			$http.get('listBoards').then(function(response) {
-				$scope.boards = response.data;
-			}, function(response) {
-				console.log(response);
-			});
+			$http.get('listBoards').then(
+					function(response) {
+						$scope.boards = response.data;
+					}, function(response) {
+						console.log(response);
+					});
 		})
 
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
@@ -87,36 +82,39 @@ angular
 			});
 		})
 
-		.controller(
-				'boardDetailsCtrl',
-				function($scope, $http, $location) {
-					$scope.scrumUser = scrumUser;
-					var data = $.param({
-						boardId : '2' // $scope.boardid
+		.controller('boardDetailsCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			var data = $.param({
+				boardId : '2' //$scope.boardid
+			});
+			var config = {
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			}
+			//gets all the details for this board except users
+			$http.post('boardDetails', data, config).then(
+					function(response) {
+						$scope.boardDetail = response.data;
+						boardStuff = response.data;
+					}, function(response) {
+						console.log(response);
 					});
-					var config = {
-						headers : {
-							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
-						}
-					}
-					// need a separate call to get user list - not part of board
-					// to prevent JSON infinite recursion
-					// $http.post('boardUsers', data, config).then(
-					// function(response) {
-					// $scope.users = response.data;
-					// }, function(response) {
-					// console.log(response);
-					// });
-					// gets all the details for this board except users
-					$http.post('boardDetails', data, config).then(
-							function(response) {
-								$scope.boardDetail = response.data;
-								boardStuff = response.data;
-							}, function(response) {
-								console.log(response);
-							});
-				})
-
+			//need a separate call to get user list - not part of board to prevent JSON infinite recursion
+			$http.post('boardUsers', data, config).then(
+					function(response) {
+						$scope.boardUsers = response.data;
+					}, function(response) {
+						console.log(response);
+					});
+			$http.get('allUsers').then(
+					function(response) {
+						$scope.allUsers = response.data;
+					}, function(response) {
+						console.log(response);
+					});
+		})
+		
 		.controller('listBoardCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {

@@ -48,4 +48,12 @@ public class AppService {
 	public Board getBoardDetails(Board board) {
 		return dao.getBoardById(board);
 	}
+	
+	public List<ScrumUser> getUserList(Board board) {
+		return dao.getUserList(board);
+	}
+	
+	public List<ScrumUser> getAllUserList() {
+		return dao.getAllUserList();
+	}
 }
