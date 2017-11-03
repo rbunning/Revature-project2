@@ -11,7 +11,7 @@ import com.revature.dao.DaoImpl;
 public class AppService {
 	@Autowired
 	private DaoImpl dao;
-
+	
 	// returns user if valid login, otherwise returns null
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser) {
 		ScrumUser loggedInUser = dao.getScrumUserByUsername(sUser);
