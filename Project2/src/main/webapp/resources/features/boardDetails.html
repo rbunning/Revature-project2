@@ -1,5 +1,10 @@
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
-<label>Board ID&emsp;&emsp;Board Name</label><p>
+
+
+<!-- <label>Board ID&emsp;&emsp;Board Name</label><p>
 <label>{{boardDetail.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{boardDetail.boardName}}</label>
 <p>
 <label>Story ID&emsp;&emsp;Story Name&emsp;&emsp;&emsp;&emsp;Points&emsp;&emsp;Lane&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Description</label>
@@ -16,4 +21,56 @@
 				   {{t.description}}
 				</label><p>
 		</div>
+</div> -->
+
+<div id="displayEntries">
+	
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr class="info">
+				<th  class="text-center">Board ID</th>
+				<th  class="text-center">Board Name</th>
+			</tr>
+			<tr class= "active">
+				<td class="info text-center">{{boardDetail.boardId}}</td>
+				<td class="info text-center">{{boardDetail.boardName}}</td>
+			</tr>	
+		</thead>
+	</table>
+	
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">Story ID</th>
+				<th  class="text-center">Story Name</th>
+				<th  class="text-center">Points</th>
+				<th  class="text-center">Lane</th>
+				<th  class="text-center">Description</th>
+			</tr>
+
+			<tr data-ng-repeat="story in boardDetail.story" class="active text-center">			
+				<td>{{story.story}}</td>
+				<td>{{story.storyName}}</td>
+				<td>{{story.storyPoints}}</td>
+				<td>{{story.laneType.ltName}}</td>
+				<td>{{story.storyDesc}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries" data-ng-repeat="story in boardDetail.story">
+			<tr class="active">
+				<th  class="text-center">Task ID</th>
+				<th  class="text-center">Task Description</th>
+			</tr>
+
+			<tr data-ng-repeat="t in story.task" class="active text-center">			
+				<td>{{t.taskId}}</td>
+				<td>{{t.description}}</td>
+			</tr>
+			</div>
+					
+		</tbody>
+	</table>
 </div>
