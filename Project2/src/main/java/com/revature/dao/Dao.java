@@ -28,6 +28,8 @@ public interface Dao {
 	public Task getTaskById(Task t);
 
 	public List<Board> getBoardList(ScrumUser sUser);
+	
+	public Board getBoardById(Board board);
 
 	// UPDATE
 
