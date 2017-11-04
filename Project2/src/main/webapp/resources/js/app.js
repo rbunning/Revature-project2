@@ -1,7 +1,7 @@
 window.onload = function() {
 }
 var scrumUser = {};
-var boardStuff = {};
+var boardNumber = 2;
 
 angular
 		.module('jabrApp', [ 'ngRoute' ])
@@ -31,6 +31,9 @@ angular
 			}).when("/boardDropDown", {
 				template: "",
 				controller : "boardDropDownCtrl"
+			}).when("/addAUser", {
+				templateUrl : "resources/features/addUser.html",
+				controller : "addUserCtrl"
 			}).otherwise({
 				redirectTo : '/'
 			})
@@ -60,7 +63,12 @@ angular
 				$location.path('/');
 			}
 			$scope.boardDetails = function(boardId) {
+				boardNumber = boardId;
 				$location.path('/boardDetail');
+			}
+			$scope.addUser = function(boardId) {
+				boardNumber = boardId;
+				$location.path('/addAUser');
 			}
 			$http.get('listBoards').then(
 					function(response) {
@@ -91,7 +99,7 @@ angular
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			var data = $.param({
-				boardId : '2' //$scope.boardid
+				boardId : boardNumber
 			});
 			var config = {
 				headers : {
@@ -102,12 +110,11 @@ angular
 			$http.post('boardDetails', data, config).then(
 					function(response) {
 						$scope.boardDetail = response.data;
-						boardStuff = response.data;
 					}, function(response) {
 						console.log(response);
 					});
 			//need a separate call to get user list - not part of board to prevent JSON infinite recursion
-			$http.post('boardUsers', data, config).then(
+			$http.get('boardUsers').then(
 					function(response) {
 						$scope.boardUsers = response.data;
 					}, function(response) {
@@ -219,3 +226,54 @@ angular
 					};
 
 				})
+
+		.controller(
+				"addUserCtrl",
+				function($scope, $http, $location) {
+					$scope.scrumUser = scrumUser;
+					var data = $.param({
+						boardId : boardNumber
+					});
+					var config = {
+						headers : {
+							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+						}
+					}
+					//gets all the details for this board except users
+					$http.post('boardDetails', data, config).then(
+							function(response) {
+								$scope.boardDetail = response.data;
+							}, function(response) {
+								console.log(response);
+							});
+					//need a separate call to get user list - not part of board to prevent JSON infinite recursion
+					$http.get('boardUsers').then(
+							function(response) {
+								$scope.boardUsers = response.data;
+							}, function(response) {
+								console.log(response);
+							});
+					$http.get('usersNotOnBoard').then(
+							function(response) {
+								$scope.allUsers = response.data;
+							}, function(response) {
+								console.log(response);
+							});
+					$scope.addTheUser = function(userId) {
+						var data = $.param({
+							scrumUserId : userId
+						});
+						var config = {
+							headers : {
+								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+							}
+						}
+						$http.post('newUser', data, config).then(
+								function(response) {
+									$location.path('/boardDetail');
+								}, function(response) {
+									console.log(response);
+								});
+						};
+					})
+				

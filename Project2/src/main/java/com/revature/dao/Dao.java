@@ -40,6 +40,8 @@ public interface Dao {
 
 	public LaneType getLaneById(LaneType lane);
 
+	public List<ScrumUser> getUsersNotOnBoard(Board board);
+
 	// UPDATE
 
 	// DELETE

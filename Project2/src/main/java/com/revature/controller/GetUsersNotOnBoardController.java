@@ -18,14 +18,15 @@ import com.revature.beans.ScrumUser;
 import com.revature.service.AppService;
 
 @RestController
-public class GetBoardUsersController {
+public class GetUsersNotOnBoardController {
 	@Autowired
 	AppService service;
 
-	@RequestMapping(value = "/boardUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ScrumUser>> getBoardUsers(HttpServletRequest request) {
+	@RequestMapping(value = "/usersNotOnBoard", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ScrumUser>> getUsersNotOnBoard(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Board board = (Board) session.getAttribute("board");
-		return new ResponseEntity<List<ScrumUser>>(service.getUserList(board), HttpStatus.OK);
+		return new ResponseEntity<List<ScrumUser>>(service.getUsersNotOnBoard(board), HttpStatus.OK);
 	}
+
 }
