@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class DaoImpl implements Dao {
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
 		ScrumUser dbUser = (ScrumUser) session.get(ScrumUser.class, sUser.getScrumUserId());
+		dbUser.getBoards().size();
 		return dbUser;
 	}
 
@@ -80,6 +82,8 @@ public class DaoImpl implements Dao {
 	public void createUserToBoard(Board board, ScrumUser sUser) {
 		Session session = sessionFactory.getCurrentSession();
 		// force board list to load
+		if (sUser.getBoards() == null)
+			sUser.setBoards(new HashSet<Board>());
 		int boardListSize = sUser.getBoards().size();
 		sUser.getBoards().add(board);
 		session.update(sUser);
@@ -137,5 +141,28 @@ public class DaoImpl implements Dao {
 		}
 
 		return userList;
+	}
+
+	@Override
+	public List<ScrumUser> getUsersNotOnBoard(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
+		List<ScrumUser> usersNotOnBoard = new ArrayList<>();
+		
+		for (ScrumUser su : userList) {
+			su.getBoards().size();
+			boolean onBoard = false;
+			for (Board b : su.getBoards()) {
+				if (b.getBoardId() == board.getBoardId()) {
+					onBoard = true;
+					break;
+				}
+			}
+			if (!onBoard) {
+				usersNotOnBoard.add(su);
+			}
+		}
+
+		return usersNotOnBoard;
 	}
 }

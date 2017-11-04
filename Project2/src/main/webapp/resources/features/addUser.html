@@ -1,0 +1,58 @@
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+
+<div id="displayEntries">
+	<table class="table table-bordered table-hover">
+	<caption class="info text-center"><span class="label label-info" style="font-size:20px">Selected Board</span></caption>
+		<thead>
+			<tr class="info">
+				<th  class="text-center">Board ID</th>
+				<th  class="text-center">Board Name</th>
+			</tr>
+			<tr class= "active">
+				<td class="info text-center">{{boardDetail.boardId}}</td>
+				<td class="info text-center">{{boardDetail.boardName}}</td>
+			</tr>	
+		</thead>
+	</table>
+	<table class="table table-bordered table-hover">
+	<caption class="info text-center"><span class="label label-info" style="font-size:20px">Current Board Users</span></caption>
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	<table class="table table-bordered table-hover">
+	<caption class="info text-center"><span class="label label-info" style="font-size:20px">Users Not Assigned To This Board</span></caption>
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+				<th  class="text-center">Add</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+				<td><input class="btn btn-success" type="submit" value="Add User" data-ng-click="addTheUser(scrumUser.scrumUserId)"></td>
+			</tr>		
+		</tbody>
+	</table>
+</div>

@@ -35,6 +35,8 @@ public interface Dao {
 
 	public List<ScrumUser> getAllUserList();
 
+	public List<ScrumUser> getUsersNotOnBoard(Board board);
+
 	// UPDATE
 
 	// DELETE

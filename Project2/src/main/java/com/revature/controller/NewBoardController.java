@@ -25,6 +25,7 @@ public class NewBoardController {
 		HttpSession session = request.getSession();
 		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
 		newBoard = service.addNewBoard(newBoard, sUser);
+		session.setAttribute("board", newBoard);
 		return new ResponseEntity<Board>(newBoard, HttpStatus.OK);
 	}
 }
