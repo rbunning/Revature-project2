@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
+import com.revature.beans.LaneType;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -102,9 +103,10 @@ public class DaoImpl implements Dao {
 
 	// Creates a new Story and save it to the DB.
 	@Override
-	public void createStory(Story s) {
+	public Story createStory(Story s) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(s);
+		return s;
 	}
 
 	@Override
@@ -144,6 +146,18 @@ public class DaoImpl implements Dao {
 	}
 
 	@Override
+	public List<LaneType> getLaneTypes() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(LaneType.class).list();
+	}
+	
+	@Override
+	public LaneType getLaneById(LaneType lane) {
+		Session session = sessionFactory.getCurrentSession();
+		return (LaneType) session.get(LaneType.class, lane.getLtId());
+	}
+    
+  @Override  
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();

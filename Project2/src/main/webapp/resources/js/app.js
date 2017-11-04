@@ -19,6 +19,9 @@ angular
 			}).when("/addTask", {
 				templateUrl : "resources/features/addTask.html",
 				controller : "addTaskCtrl"
+			}).when("/addStory", {
+				templateUrl : "resources/features/addStory.html",
+				controller : "addStoryCtrl"
 			}).when("/listBoard", {
 				templateUrl : "resources/features/listBoard.html",
 				controller : "listBoardCtrl"
@@ -49,6 +52,9 @@ angular
 			}
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
+			}
+			$scope.addAStory = function() {
+				$location.path('/addStory');
 			}
 			$scope.listBoards = function() {
 				$location.path('/listBoard');
@@ -98,6 +104,23 @@ angular
 					$scope.scrumUser = scrumUser;
 					var data = $.param({
 						boardId : boardNumber
+
+		.controller('boardDetailsCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			var data = $.param({
+				boardId : boardNumber
+			});
+			var config = {
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			}
+			//gets all the details for this board except users
+			$http.post('boardDetails', data, config).then(
+					function(response) {
+						$scope.boardDetail = response.data;
+					}, function(response) {
+						console.log(response);
 					});
 					var config = {
 						headers : {
@@ -133,11 +156,45 @@ angular
 				console.log(response);
 			});
 		})
-
+		
+		.controller('addStoryCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			$http.get('listBoards').then(function(response) {
+				$scope.boards = response.data;
+			}, function(response) {
+				console.log(response);
+			});
+			$http.get('listLanes').then(function(response) {
+				$scope.lanes = response.data;
+			}, function(response) {
+				console.log(response);
+			});
+			$scope.submit = function() {
+				var data = $.param({
+					boardId : $scope.storyboard,
+					laneTypeId : $scope.storylane,
+					storyName : $scope.storyname,
+					storyPoints : $scope.storypoint,
+					storyDesc : $scope.storydescription
+				});
+				var config = {
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+					}
+				}
+				$http.post('newStory', data, config).then(
+					function(response) {
+						$location.path('/homePage');
+					}, function(response) {
+						console.log(response);
+					});
+			};
+		})
+		
 		.controller('homeController', function($scope, $location) {
 			$scope.scrumUser = scrumUser;
 		})
-
+		
 		.controller(
 				"loginCtrl",
 				function($scope, $http, $location) {

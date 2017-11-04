@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Board;
+import com.revature.beans.LaneType;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -34,8 +35,8 @@ public class AppService {
 		return newBoard;
 	}
 	
-	public void addNewStory(Story newStory) {
-		dao.createStory(newStory);
+	public Story addNewStory(Story newStory) {
+		return dao.createStory(newStory);
 	}
 	
 	public void addUserToBoard(Board board, ScrumUser sUser) {
@@ -58,6 +59,14 @@ public class AppService {
 		return dao.getAllUserList();
 	}
 	
+	public List<LaneType> getLaneTypeList() {
+		return dao.getLaneTypes();
+	}
+	
+	public LaneType getLane(LaneType lane) {
+		return dao.getLaneById(lane);
+	}
+
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		return dao.getUsersNotOnBoard(board);
 	}

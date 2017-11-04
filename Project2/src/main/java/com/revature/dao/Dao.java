@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.beans.Board;
+import com.revature.beans.LaneType;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -18,7 +19,7 @@ public interface Dao {
 
 	public void createTaskToStory(Story story, Task task);
 	
-	public void createStory(Story s);
+	public Story createStory(Story s);
 
 	// READ
 	public ScrumUser getScrumUserById(ScrumUser sUser);
@@ -34,6 +35,10 @@ public interface Dao {
 	public List<ScrumUser> getUserList(Board board);
 
 	public List<ScrumUser> getAllUserList();
+	
+	public List<LaneType> getLaneTypes();
+
+	public LaneType getLaneById(LaneType lane);
 
 	public List<ScrumUser> getUsersNotOnBoard(Board board);
 
