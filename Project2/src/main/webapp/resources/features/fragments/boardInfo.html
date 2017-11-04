@@ -1,0 +1,15 @@
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+<!-- <div class="item" data-ng-repeat="board in boards" > -->
+	<form>
+		<select>
+			<option data-ng-repeat='board in boards'>
+		{{board.boardName}}
+		</option>
+		</select>
+		<input type="submit" value="Submit" id="submitButton">
+	</form>
+</div>
