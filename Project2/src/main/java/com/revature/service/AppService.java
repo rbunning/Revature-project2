@@ -61,4 +61,8 @@ public class AppService {
 	public List<LaneType> getLaneTypeList() {
 		return dao.getLaneTypes();
 	}
+	
+	public LaneType getLane(LaneType lane) {
+		return dao.getLaneById(lane);
+	}
 }

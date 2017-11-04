@@ -87,7 +87,7 @@ angular
 				console.log(response);
 			});
 		})
-
+		
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			var data = $.param({
@@ -144,10 +144,10 @@ angular
 			});
 			$scope.submit = function() {
 				var data = $.param({
-//					board : $scope.storyboard,
-//					laneType : $scope.storylane,
+					boardId : $scope.storyboard,
+					laneTypeId : $scope.storylane,
 					storyName : $scope.storyname,
-					storyPoint : $scope.storypoint,
+					storyPoints : $scope.storypoint,
 					storyDesc : $scope.storydescription
 				});
 				var config = {
@@ -163,11 +163,11 @@ angular
 					});
 			};
 		})
-
+		
 		.controller('homeController', function($scope, $location) {
 			$scope.scrumUser = scrumUser;
 		})
-
+		
 		.controller(
 				"loginCtrl",
 				function($scope, $http, $location) {

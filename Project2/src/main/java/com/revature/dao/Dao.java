@@ -38,6 +38,8 @@ public interface Dao {
 	
 	public List<LaneType> getLaneTypes();
 
+	public LaneType getLaneById(LaneType lane);
+
 	// UPDATE
 
 	// DELETE
