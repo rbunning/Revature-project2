@@ -16,6 +16,9 @@ angular
 			}).when("/addBoard", {
 				templateUrl : "resources/features/addBoard.html",
 				controller : "addBoardCtrl"
+			}).when("/addTask", {
+				templateUrl : "resources/features/addTask.html",
+				controller : "addTaskCtrl"
 			}).when("/listBoard", {
 				templateUrl : "resources/features/listBoard.html",
 				controller : "listBoardCtrl"
@@ -26,7 +29,7 @@ angular
 				templateUrl : "resources/features/fragments/boardInfo.html",
 				controller : "boardInfoCtrl"
 			}).when("/boardDropDown", {
-				template: "",
+				template : "",
 				controller : "boardDropDownCtrl"
 			}).when("/addAUser", {
 				templateUrl : "resources/features/addUser.html",
@@ -64,12 +67,11 @@ angular
 				boardNumber = boardId;
 				$location.path('/addAUser');
 			}
-			$http.get('listBoards').then(
-					function(response) {
-						$scope.boards = response.data;
-					}, function(response) {
-						console.log(response);
-					});
+			$http.get('listBoards').then(function(response) {
+				$scope.boards = response.data;
+			}, function(response) {
+				console.log(response);
+			});
 		})
 
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
@@ -80,7 +82,7 @@ angular
 				console.log(response);
 			});
 		})
-		
+
 		.controller('boardDropDownCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
@@ -90,38 +92,39 @@ angular
 			});
 		})
 
-		.controller('boardDetailsCtrl', function($scope, $http, $location) {
-			$scope.scrumUser = scrumUser;
-			var data = $.param({
-				boardId : boardNumber
-			});
-			var config = {
-				headers : {
-					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
-				}
-			}
-			//gets all the details for this board except users
-			$http.post('boardDetails', data, config).then(
-					function(response) {
-						$scope.boardDetail = response.data;
-					}, function(response) {
-						console.log(response);
+		.controller(
+				'boardDetailsCtrl',
+				function($scope, $http, $location) {
+					$scope.scrumUser = scrumUser;
+					var data = $.param({
+						boardId : boardNumber
 					});
-			//need a separate call to get user list - not part of board to prevent JSON infinite recursion
-			$http.get('boardUsers').then(
-					function(response) {
+					var config = {
+						headers : {
+							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+						}
+					}
+					// gets all the details for this board except users
+					$http.post('boardDetails', data, config).then(
+							function(response) {
+								$scope.boardDetail = response.data;
+							}, function(response) {
+								console.log(response);
+							});
+					// need a separate call to get user list - not part of board
+					// to prevent JSON infinite recursion
+					$http.get('boardUsers').then(function(response) {
 						$scope.boardUsers = response.data;
 					}, function(response) {
 						console.log(response);
 					});
-			$http.get('allUsers').then(
-					function(response) {
+					$http.get('allUsers').then(function(response) {
 						$scope.allUsers = response.data;
 					}, function(response) {
 						console.log(response);
 					});
-		})
-		
+				})
+
 		.controller('listBoardCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
@@ -199,26 +202,25 @@ angular
 							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 						}
 					}
-					//gets all the details for this board except users
+					// gets all the details for this board except users
 					$http.post('boardDetails', data, config).then(
 							function(response) {
 								$scope.boardDetail = response.data;
 							}, function(response) {
 								console.log(response);
 							});
-					//need a separate call to get user list - not part of board to prevent JSON infinite recursion
-					$http.get('boardUsers').then(
-							function(response) {
-								$scope.boardUsers = response.data;
-							}, function(response) {
-								console.log(response);
-							});
-					$http.get('usersNotOnBoard').then(
-							function(response) {
-								$scope.allUsers = response.data;
-							}, function(response) {
-								console.log(response);
-							});
+					// need a separate call to get user list - not part of board
+					// to prevent JSON infinite recursion
+					$http.get('boardUsers').then(function(response) {
+						$scope.boardUsers = response.data;
+					}, function(response) {
+						console.log(response);
+					});
+					$http.get('usersNotOnBoard').then(function(response) {
+						$scope.allUsers = response.data;
+					}, function(response) {
+						console.log(response);
+					});
 					$scope.addTheUser = function(userId) {
 						var data = $.param({
 							scrumUserId : userId
@@ -234,6 +236,29 @@ angular
 								}, function(response) {
 									console.log(response);
 								});
-						};
-					})
-				
+					};
+				})
+		.controller(
+				"addTaskCtrl",
+				function($scope, $http, $location) {
+					$scope.scrumUser = scrumUser;
+					$scope.addTask = function() {
+						var data = $.param({
+							description : $scope.taskDescription
+							
+							
+						});
+						var config = {
+							headers : {
+								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+							}
+						}
+						$http.post('newTask', data, config).then(
+								function(response) {
+									$location.path('/homePage');
+								}, function(response) {
+									console.log(response);
+								});
+					};
+
+				})
