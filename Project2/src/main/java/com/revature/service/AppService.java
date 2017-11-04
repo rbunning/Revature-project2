@@ -64,6 +64,7 @@ public class AppService {
 	
 	public LaneType getLane(LaneType lane) {
 		return dao.getLaneById(lane);
+	}
 
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		return dao.getUsersNotOnBoard(board);
