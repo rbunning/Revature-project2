@@ -9,6 +9,7 @@ import com.revature.beans.Board;
 import com.revature.beans.LaneType;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
+import com.revature.beans.Task;
 import com.revature.dao.DaoImpl;
 
 @Service
@@ -72,5 +73,17 @@ public class AppService {
 	
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		return dao.getScrumUserById(sUser);
+	}
+	
+	public Task addNewTask(Task newTask) {
+		newTask = dao.createTask(newTask);
+//		Story dbStory = dao.getStoryById(story);
+//		dao.createTaskToStory(dbStory, newTask);
+			//***might not need story to createTaskToStory, only need to get the story id to put into DB. 
+		return dao.createTask(newTask);
+	}
+	
+	public void addTaskToStory(Story story, Task task) {
+		dao.createTaskToStory(story, task);
 	}
 }
