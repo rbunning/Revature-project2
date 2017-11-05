@@ -24,7 +24,7 @@
 	<label>{{board.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{board.boardName}}</label>
 </div> -->
 
-
+<!-- 
 <div id="displayEntries">
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -45,4 +45,13 @@
 		<tfoot>
 		</tfoot>
 	</table>
+</div> -->
+
+<div class="active" data-ng-controller="boardInfoCtrl">
+	<ul data-ng-repeat="board in boards" >
+		<li>
+		{{board.boardName}}
+		<button class="text-center" data-ng-click="boardDetails(board.boardId)">View</button>
+		</li>
+	</ul>
 </div>
