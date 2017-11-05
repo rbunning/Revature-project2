@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
 import com.revature.beans.LaneType;
+import com.revature.beans.Logs;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -56,7 +57,7 @@ public class DaoImpl implements Dao {
 	@Override
 	public void createTaskToStory(Story story, Task task) {
 		Session session = sessionFactory.getCurrentSession();
-		//setting story to update the story id
+		// setting story to update the story id
 		task.setStory(story);
 		session.update(task);
 	}
@@ -114,7 +115,7 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		board = (Board) session.get(Board.class, board.getBoardId());
 		board.getStory().size();
-		for(Story s : board.getStory()) {
+		for (Story s : board.getStory()) {
 			s.getTask().size();
 		}
 		return board;
@@ -150,19 +151,19 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(LaneType.class).list();
 	}
-	
+
 	@Override
 	public LaneType getLaneById(LaneType lane) {
 		Session session = sessionFactory.getCurrentSession();
 		return (LaneType) session.get(LaneType.class, lane.getLtId());
 	}
-    
+  
 	@Override
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
 		List<ScrumUser> usersNotOnBoard = new ArrayList<>();
-		
+
 		for (ScrumUser su : userList) {
 			su.getBoards().size();
 			boolean onBoard = false;
@@ -178,5 +179,11 @@ public class DaoImpl implements Dao {
 		}
 
 		return usersNotOnBoard;
+	}
+
+	@Override
+	public List<Logs> getLogs() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(Logs.class).list();
 	}
 }

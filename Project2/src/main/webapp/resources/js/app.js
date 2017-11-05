@@ -16,12 +16,15 @@ angular
 			}).when("/addBoard", {
 				templateUrl : "resources/features/addBoard.html",
 				controller : "addBoardCtrl"
-			}).when("/addTask", {		
- 				templateUrl : "resources/features/addTask.html",		
- 				controller : "addTaskCtrl"		
- 			}).when("/addStory", {		
- 				templateUrl : "resources/features/addStory.html",		
- 				controller : "addStoryCtrl"
+			}).when("/addTask", {
+				templateUrl : "resources/features/addTask.html",
+				controller : "addTaskCtrl"
+			}).when("/addStory", {
+				templateUrl : "resources/features/addStory.html",
+				controller : "addStoryCtrl"
+			}).when("/logs", {
+				templateUrl : "resources/features/logs.html",
+				controller : "logsCtrl"
 			}).when("/listBoard", {
 				templateUrl : "resources/features/listBoard.html",
 				controller : "listBoardCtrl"
@@ -59,9 +62,12 @@ angular
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
 			}
-			$scope.addAStory = function() {		
- 				$location.path('/addStory');		
- 			}
+			$scope.addAStory = function() {
+				$location.path('/addStory');
+			}
+			$scope.listLogs = function() {
+				$location.path('/logs');
+			}
 			$scope.listBoards = function() {
 				$location.path('/listBoard');
 			}
@@ -98,6 +104,15 @@ angular
 
 		})
 
+		.controller('logsCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			$http.get('allLogs').then(function(response) {
+				$scope.logs = response.data;
+			}, function(response) {
+				console.log(response);
+			});
+		})
+		
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
 			$scope.boardDetails = function(boardId) {
 				boardNumber = boardId;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Board;
 import com.revature.beans.LaneType;
+import com.revature.beans.Logs;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -69,6 +70,10 @@ public class AppService {
 
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		return dao.getUsersNotOnBoard(board);
+	}
+	
+	public List<Logs> getLogList() {
+		return dao.getLogs();
 	}
 	
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
