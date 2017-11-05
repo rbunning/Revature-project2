@@ -1,0 +1,57 @@
+<!-- <head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+<!-- <div class="item" data-ng-repeat="board in boards" > -->
+
+<!--	<form>
+		<select>
+			<option data-ng-repeat='board in boards'>
+		{{board.boardName}}
+		</option>
+		</select>
+		<input type="submit" value="Submit" id="submitButton">
+	</form>
+</div> -->
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+<!-- <label>Board ID&emsp;&emsp;Board Name</label>
+<div class="item" data-ng-repeat="board in boards" >
+	<label>{{board.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{board.boardName}}</label>
+</div> -->
+
+<!-- 
+<div id="displayEntries">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr class="active"><th colspan="10" class="text-center">List of Boards</th></tr>
+		</thead>
+		<tbody id="allEntries">
+			<tr class="active">
+				<th class="text-center">Board ID</th>
+				<th class="text-center">Board Name</th>
+			</tr>
+
+			<tr data-ng-repeat="board in boards" class="active text-center" data-ng-click="boardDetails(board.boardId)">
+				<td>{{board.boardId}}</td>
+				<td>{{board.boardName}}</td>
+			</tr>		
+			
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+</div> -->
+
+<div class="active" data-ng-controller="boardInfoCtrl">
+	<ul data-ng-repeat="board in boards" >
+		<li>
+		{{board.boardName}}
+		<button class="text-center" data-ng-click="boardDetails(board.boardId)">View</button>
+		</li>
+	</ul>
+</div>

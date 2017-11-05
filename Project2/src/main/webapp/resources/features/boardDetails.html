@@ -1,0 +1,93 @@
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+
+<div id="displayEntries">
+	
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr class="info">
+				<th  class="text-center">Board ID</th>
+				<th  class="text-center">Board Name</th>
+			</tr>
+			<tr class= "active">
+				<td class="info text-center">{{boardDetail.boardId}}</td>
+				<td class="info text-center">{{boardDetail.boardName}}</td>
+			</tr>	
+		</thead>
+	</table>
+	
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">Story ID</th>
+				<th  class="text-center">Story Name</th>
+				<th  class="text-center">Points</th>
+				<th  class="text-center">Lane</th>
+				<th  class="text-center">Description</th>
+			</tr>
+
+			<tr data-ng-repeat="story in boardDetail.story" class="active text-center">			
+				<td>{{story.story}}</td>
+				<td>{{story.storyName}}</td>
+				<td>{{story.storyPoints}}</td>
+				<td>{{story.laneType.ltName}}</td>
+				<td>{{story.storyDesc}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries" data-ng-repeat="story in boardDetail.story">
+			<tr class="active">
+				<th  class="text-center">Task ID</th>
+				<th  class="text-center">Task Description</th>
+			</tr>
+
+			<tr data-ng-repeat="t in story.task" class="active text-center">			
+				<td>{{t.taskId}}</td>
+				<td>{{t.description}}</td>
+			</tr>
+			</div>
+					
+		</tbody>
+	</table>
+	Board Users
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	All Users
+	<table class="table table-bordered table-hover">
+		<tbody id="allEntries">
+			<tr class="active">
+				<th  class="text-center">User ID</th>
+				<th  class="text-center">First Name</th>
+				<th  class="text-center">Last Name</th>
+				<th  class="text-center">Role</th>
+			</tr>
+
+			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">			
+				<td>{{scrumUser.scrumUserId}}</td>
+				<td>{{scrumUser.scrumUserFirstname}}</td>
+				<td>{{scrumUser.scrumUserLastname}}</td>
+				<td>{{scrumUser.roleType.roleName}}</td>
+			</tr>		
+		</tbody>
+	</table>
+	
+</div>

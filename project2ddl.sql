@@ -61,7 +61,6 @@ CREATE TABLE chart(
  board_id INT NOT NULL,
  chart_title VARCHAR2(4000),
  start_date DATE NOT NULL,
- end_date DATE NOT NULL,
  PRIMARY KEY(chart_id),
  FOREIGN KEY(board_id) REFERENCES board(board_id)
 );

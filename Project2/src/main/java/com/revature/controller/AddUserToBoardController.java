@@ -5,10 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Board;
@@ -16,16 +15,16 @@ import com.revature.beans.ScrumUser;
 import com.revature.service.AppService;
 
 @RestController
-public class NewBoardController {
+public class AddUserToBoardController {
 	@Autowired
 	AppService service;
 
-	@RequestMapping(value = "/newBoard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Board> addBoard(Board newBoard, HttpServletRequest request) {
+	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void addUserToBoard(ScrumUser user, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
-		newBoard = service.addNewBoard(newBoard, sUser);
-		session.setAttribute("board", newBoard);
-		return new ResponseEntity<Board>(newBoard, HttpStatus.OK);
+		Board board = (Board) session.getAttribute("board");
+		user = service.getScrumUserById(user);
+		service.addUserToBoard(board, user);
 	}
 }

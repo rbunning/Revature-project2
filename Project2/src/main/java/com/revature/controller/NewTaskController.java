@@ -7,25 +7,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.revature.beans.Board;
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Task;
 import com.revature.service.AppService;
 
-@RestController
-public class NewBoardController {
+@Controller
+public class NewTaskController {
+	
 	@Autowired
 	AppService service;
-
-	@RequestMapping(value = "/newBoard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Board> addBoard(Board newBoard, HttpServletRequest request) {
+	
+	@RequestMapping("/newTask")
+	public ModelAndView addTask() {
+		return new ModelAndView("/resources/features/addTask.html");
+	}
+	
+	@RequestMapping(value = "/newTask", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <Task> addTask(Task newTask, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
-		newBoard = service.addNewBoard(newBoard, sUser);
-		session.setAttribute("board", newBoard);
-		return new ResponseEntity<Board>(newBoard, HttpStatus.OK);
+		
+		newTask = service.addNewTask(newTask);
+		return new ResponseEntity<Task>(newTask, HttpStatus.OK);
 	}
+	
 }

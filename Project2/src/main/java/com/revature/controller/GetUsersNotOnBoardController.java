@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,16 +18,15 @@ import com.revature.beans.ScrumUser;
 import com.revature.service.AppService;
 
 @RestController
-public class NewBoardController {
+public class GetUsersNotOnBoardController {
 	@Autowired
 	AppService service;
 
-	@RequestMapping(value = "/newBoard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Board> addBoard(Board newBoard, HttpServletRequest request) {
+	@RequestMapping(value = "/usersNotOnBoard", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ScrumUser>> getUsersNotOnBoard(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
-		newBoard = service.addNewBoard(newBoard, sUser);
-		session.setAttribute("board", newBoard);
-		return new ResponseEntity<Board>(newBoard, HttpStatus.OK);
+		Board board = (Board) session.getAttribute("board");
+		return new ResponseEntity<List<ScrumUser>>(service.getUsersNotOnBoard(board), HttpStatus.OK);
 	}
+
 }
