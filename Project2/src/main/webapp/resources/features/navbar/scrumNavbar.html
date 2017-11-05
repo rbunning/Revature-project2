@@ -1,6 +1,6 @@
 <div data-ng-controller="navbarController">
 	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container-fluid" >
+		<div class="container-fluid">
 
 			<div class="row" >
 				<div class="navbar-header">
@@ -9,7 +9,7 @@
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" onmouseover="" style="cursor: pointer;" data-ng-click="home()">JAB'R!</a>
+					<a class="navbar-brand" onmouseover="" style="cursor: pointer;"	data-ng-click="home()">JAB'R!</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
@@ -20,7 +20,7 @@
  				            <li><a id="displayBoard" href="displayBoard" id="navbarContent">Display all boards</a></li>
  				          </ul>
  				        </li>
- 				        
+ 
  				        <li>
  				        		<a onmouseover="" style="cursor: pointer;" data-ng-click="boardInfo()">
  				        			Board Selector
@@ -30,24 +30,29 @@
 
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="boardDetails(2)">Details Test</a></li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-show="isScrumMaster" data-ng-click="boardDetails(2)">Details	Test</a></li>
 						<li>
-							<a onmouseover="" style="cursor: pointer;"  data-ng-click="listBoards()">List Boards</a></li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-click="listBoards()">List Boards</a></li>
 						<li>
-							<a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="addABoard()">Add a Board</a></li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-show="isScrumMaster" data-ng-click="addABoard()">Add	a Board</a></li>
 						<li>
-							<a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="addAStory()">Add a Story</a></li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-show="isScrumMaster" data-ng-click="">Add a Story</a></li>
 						<li>
-							<a onmouseover="" style="cursor: pointer;"  data-ng-show="isScrumMaster" data-ng-click="addUser(2)">Add a User</a></li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-show="isScrumMaster" data-ng-click="addUser()">Add a	User</a></li>
+						<li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-show="isScrumMaster" data-ng-click="configChart()">Configure	Chart</a></li>
+						<li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-click="displayChart()">Display Chart</a></li>
+						<li>
+							<a onmouseover="" style="cursor: pointer;" data-ng-click="logout()">Logout</a></li>
+						<ul class="dropdown-menu">
+							<li><a data-toggle="collapse" data-target=".navbar-collapse"
+								ui-sref="main.adminPoi">admin1</a></li>
+							<li><a data-toggle="collapse" data-target=".navbar-collapse"
+								ui-sref="main.adminUsers">admin2</a></li>
 
-						<li><a onmouseover="" style="cursor: pointer;" data-ng-click="logout()">Logout</a></li>
-							<ul class="dropdown-menu">
-								<li><a data-toggle="collapse"
-									data-target=".navbar-collapse" ui-sref="main.adminPoi">admin1</a></li>
-								<li><a data-toggle="collapse"
-									data-target=".navbar-collapse" ui-sref="main.adminUsers">admin2</a></li>
-
-							</ul></li>
+						</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
