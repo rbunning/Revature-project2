@@ -3,11 +3,6 @@
 </head>
 
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
-<!-- <label>Board ID&emsp;&emsp;Board Name</label>
-<div class="item" data-ng-repeat="board in boards" >
-	<label>{{board.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{board.boardName}}</label>
-</div> -->
-
 
 <div id="displayEntries">
 	<table class="table table-bordered table-hover">
@@ -16,13 +11,17 @@
 		</thead>
 		<tbody id="allEntries">
 			<tr class="active">
-				<th class="text-center">Board ID</th>
-				<th class="text-center">Board Name</th>
+				<th class="text-center">Logger</th>
+				<th class="text-center">level</th>
+				<th class="text-center">Date</th>
+				<th class="text-center">Message</th>
 			</tr>
 
-			<tr data-ng-repeat="board in boards" class="active text-center">			
-				<td>{{board.boardId}}</td>
-				<td>{{board.boardName}}</td>
+			<tr data-ng-repeat="log in logs" class="active text-center">			
+				<td>{{log.logsDated}}</td>
+				<td>{{log.logsLogger}}</td>
+				<td>{{log.logsLevel}}</td>
+				<td>{{log.logsMessage}}</td>
 			</tr>		
 		</tbody>
 		<tfoot>

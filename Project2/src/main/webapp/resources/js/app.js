@@ -88,8 +88,8 @@ angular
 
 		.controller('logsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
-			$http.get('listBoards').then(function(response) {
-				$scope.boards = response.data;
+			$http.get('allLogs').then(function(response) {
+				$scope.logs = response.data;
 			}, function(response) {
 				console.log(response);
 			});

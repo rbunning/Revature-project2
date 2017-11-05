@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.beans.Board;
 import com.revature.beans.LaneType;
+import com.revature.beans.Logs;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -37,6 +38,8 @@ public interface Dao {
 	public List<ScrumUser> getAllUserList();
 	
 	public List<LaneType> getLaneTypes();
+	
+	public List<Logs> getLogs();
 
 	public LaneType getLaneById(LaneType lane);
 
