@@ -36,7 +36,7 @@ public interface Dao {
 	public List<ScrumUser> getUserList(Board board);
 
 	public List<ScrumUser> getAllUserList();
-	
+
 	public List<LaneType> getLaneTypes();
 	
 	public List<Logs> getLogs();

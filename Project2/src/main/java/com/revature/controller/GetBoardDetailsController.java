@@ -27,4 +27,11 @@ public class GetBoardDetailsController {
 		session.setAttribute("board", board);
 		return new ResponseEntity<Board>(board, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/boardDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Board> getCurrentBoardDetails(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Board board = (Board) session.getAttribute("board");
+		return new ResponseEntity<Board>(board, HttpStatus.OK);
+	}
 }

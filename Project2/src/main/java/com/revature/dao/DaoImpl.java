@@ -157,7 +157,7 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return (LaneType) session.get(LaneType.class, lane.getLtId());
 	}
-
+  
 	@Override
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
