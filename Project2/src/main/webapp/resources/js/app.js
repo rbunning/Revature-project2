@@ -22,6 +22,9 @@ angular
 			}).when("/addStory", {
 				templateUrl : "resources/features/addStory.html",
 				controller : "addStoryCtrl"
+			}).when("/logs", {
+				templateUrl : "resources/features/logs.html",
+				controller : "logsCtrl"
 			}).when("/listBoard", {
 				templateUrl : "resources/features/listBoard.html",
 				controller : "listBoardCtrl"
@@ -56,6 +59,9 @@ angular
 			$scope.addAStory = function() {
 				$location.path('/addStory');
 			}
+			$scope.listLogs = function() {
+				$location.path('/logs');
+			}
 			$scope.listBoards = function() {
 				$location.path('/listBoard');
 			}
@@ -80,6 +86,15 @@ angular
 			});
 		})
 
+		.controller('logsCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			$http.get('listBoards').then(function(response) {
+				$scope.boards = response.data;
+			}, function(response) {
+				console.log(response);
+			});
+		})
+		
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
