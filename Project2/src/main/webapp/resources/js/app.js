@@ -68,6 +68,9 @@ angular
 			$scope.home = function() {
 				$location.path('/homePage');
 			}
+			$scope.boardInfo = function() {
+				$location.path('/boardInfo')
+			}
 			$scope.logout = function() {
 				$location.path('/');
 			}
@@ -79,6 +82,7 @@ angular
 				boardNumber = boardId;
 				$location.path('/addAUser');
 			}
+
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
@@ -91,10 +95,17 @@ angular
 					}, function(response) {
 						console.log(response);
 					});
+
 		})
 
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
+			$scope.boardDetails = function(boardId) {
+				boardNumber = boardId;
+				$location.path('/boardDetail');
+			}
+			
 			$scope.scrumUser = scrumUser;
+			
 			$http.get('listBoards').then(function(response) {
 				$scope.boards = response.data;
 			}, function(response) {
