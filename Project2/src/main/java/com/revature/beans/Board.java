@@ -64,6 +64,14 @@ public class Board implements Serializable {
 		this.boardName = boardName;
 	}
 
+	public Chart getChart() {
+		return chart;
+	}
+
+	public void setChart(Chart chart) {
+		this.chart = chart;
+	}
+
 	public Set<Story> getStory() {
 		return story;
 	}
