@@ -98,13 +98,6 @@ angular
 			});
 		})
 
-		.controller(
-				'boardDetailsCtrl',
-				function($scope, $http, $location) {
-					$scope.scrumUser = scrumUser;
-					var data = $.param({
-						boardId : boardNumber
-
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			var data = $.param({
@@ -127,14 +120,7 @@ angular
 							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 						}
 					}
-					// gets all the details for this board except users
-					$http.post('boardDetails', data, config).then(
-							function(response) {
-								$scope.boardDetail = response.data;
-							}, function(response) {
-								console.log(response);
-							});
-					// need a separate call to get user list - not part of board
+						// need a separate call to get user list - not part of board
 					// to prevent JSON infinite recursion
 					$http.get('boardUsers').then(function(response) {
 						$scope.boardUsers = response.data;
