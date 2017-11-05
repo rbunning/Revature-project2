@@ -151,19 +151,19 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(LaneType.class).list();
 	}
-
+	
 	@Override
 	public LaneType getLaneById(LaneType lane) {
 		Session session = sessionFactory.getCurrentSession();
 		return (LaneType) session.get(LaneType.class, lane.getLtId());
 	}
-  
+    
 	@Override
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
 		List<ScrumUser> usersNotOnBoard = new ArrayList<>();
-
+		
 		for (ScrumUser su : userList) {
 			su.getBoards().size();
 			boolean onBoard = false;
@@ -180,7 +180,7 @@ public class DaoImpl implements Dao {
 
 		return usersNotOnBoard;
 	}
-
+	
 	@Override
 	public List<Logs> getLogs() {
 		Session session = sessionFactory.getCurrentSession();

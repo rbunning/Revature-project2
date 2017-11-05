@@ -12,9 +12,8 @@ public class ChartDto implements Serializable {
 		super();
 	}
 
-	public ChartDto(String type, ChartDataDto data) {
+	public ChartDto(ChartDataDto data) {
 		super();
-		this.type = type;
 		this.data = data;
 	}
 
