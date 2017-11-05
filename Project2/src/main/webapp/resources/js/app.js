@@ -62,6 +62,9 @@ angular
 			$scope.home = function() {
 				$location.path('/homePage');
 			}
+			$scope.boardInfo = function() {
+				$location.path('/boardInfo')
+			}
 			$scope.logout = function() {
 				$location.path('/');
 			}
@@ -73,6 +76,7 @@ angular
 				boardNumber = boardId;
 				$location.path('/addAUser');
 			}
+		
 			$http.get('listBoards').then(function(response) {
 				$scope.boards = response.data;
 			}, function(response) {
