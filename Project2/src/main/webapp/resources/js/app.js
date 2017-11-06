@@ -105,32 +105,32 @@ angular
 //						console.log(response);
 //					});
 		})
-		
+
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
-			$http.get('listLanes').then(function(response) {		
- 				$scope.lanes = response.data;		
- 			}, function(response) {		
- 				console.log(response);		
- 			});	
-			$scope.submit = function() {		
- 				var data = $.param({		
- 					laneTypeId : $scope.storylane,		
+			$http.get('listLanes').then(function(response) {
+ 				$scope.lanes = response.data;
+ 			}, function(response) {
+ 				console.log(response);
+ 			});
+			$scope.submit = function() {
+ 				var data = $.param({
+ 					laneTypeId : $scope.storylane,
  					storyId : storyNumber
- 				});		
- 				var config = {		
- 					headers : {		
- 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'		
- 					}		
+ 				});
+ 				var config = {
+ 					headers : {
+ 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+ 					}
  				}
- 				$http.post('update', data, config).then(		
- 					function(response) {		
- 						$location.path('/boardDetail');		
- 					}, function(response) {		
+ 				$http.post('update', data, config).then(
+ 					function(response) {
+ 						$location.path('/boardDetail');
+ 					}, function(response) {
  						console.log(response);
  						// If something went wrong send the user back to board.
- 						$location.path('/boardDetail');	
- 					});		
+ 						$location.path('/boardDetail');
+ 					});
  			};
 		})
 
@@ -142,22 +142,22 @@ angular
 				console.log(response);
 			});
 		})
-		
+
 		.controller('boardInfoCtrl', function($scope, $http, $location) {
 			$scope.boardDetails = function(boardId) {
 				boardNumber = boardId;
 				$location.path('/boardDetail');
 			}
-			
+
 			$scope.scrumUser = scrumUser;
-			
+
 			$http.get('listBoards').then(function(response) {
 				$scope.boards = response.data;
 			}, function(response) {
 				console.log(response);
 			});
 		})
-		
+
 		.controller('boardDropDownCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
@@ -201,8 +201,14 @@ angular
 					}, function(response) {
 						console.log(response);
 					});
+			$http.get('listLanes').then(
+					function(response) {
+						$scope.lanes = response.data;
+					}, function(response) {
+						console.log(response);
+					});
 		})
-		
+
 		.controller('addStoryCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
@@ -210,30 +216,30 @@ angular
 			}, function(response) {
 				console.log(response);
 			});
-			$http.get('listLanes').then(function(response) {		
- 				$scope.lanes = response.data;		
- 			}, function(response) {		
- 				console.log(response);		
- 			});		
- 			$scope.submit = function() {		
- 				var data = $.param({		
- 					boardId : $scope.storyboard,		
- 					laneTypeId : $scope.storylane,		
- 					storyName : $scope.storyname,		
- 					storyPoints : $scope.storypoint,		
- 					storyDesc : $scope.storydescription		
- 				});		
- 				var config = {		
- 					headers : {		
- 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'		
- 					}		
- 				}		
- 				$http.post('newStory', data, config).then(		
- 					function(response) {		
- 						$location.path('/homePage');		
- 					}, function(response) {		
- 						console.log(response);		
- 					});		
+			$http.get('listLanes').then(function(response) {
+ 				$scope.lanes = response.data;
+ 			}, function(response) {
+ 				console.log(response);
+ 			});
+ 			$scope.submit = function() {
+ 				var data = $.param({
+ 					boardId : $scope.storyboard,
+ 					laneTypeId : $scope.storylane,
+ 					storyName : $scope.storyname,
+ 					storyPoints : $scope.storypoint,
+ 					storyDesc : $scope.storydescription
+ 				});
+ 				var config = {
+ 					headers : {
+ 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+ 					}
+ 				}
+ 				$http.post('newStory', data, config).then(
+ 					function(response) {
+ 						$location.path('/homePage');
+ 					}, function(response) {
+ 						console.log(response);
+ 					});
  			};
 		})
 
@@ -307,7 +313,7 @@ angular
 				function($scope, $http, $location) {
 					$scope.scrumUser = scrumUser;
 					//  temporarily use post method for get board details
-					//  until setting of default board is done (via dropdown or 
+					//  until setting of default board is done (via dropdown or
 					//  forcing user to select a board first
 					var data = $.param({
 						boardId : boardNumber
@@ -376,7 +382,7 @@ angular
 					};
 
 				})
-					
+
 		.controller('displayChartCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			$http.get('getChart').then(function(response) {
@@ -388,4 +394,4 @@ angular
 		})
 
 
-				
+
