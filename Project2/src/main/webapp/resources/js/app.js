@@ -115,7 +115,7 @@ angular
  			});	
 			$scope.submit = function() {		
  				var data = $.param({		
- 					laneType : $scope.storylane,		
+ 					laneTypeId : $scope.storylane,		
  					storyId : storyNumber
  				});		
  				var config = {		
@@ -123,7 +123,7 @@ angular
  						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'		
  					}		
  				}
- 				$http.post('move', data, config).then(		
+ 				$http.post('update', data, config).then(		
  					function(response) {		
  						$location.path('/boardDetail');		
  					}, function(response) {		
