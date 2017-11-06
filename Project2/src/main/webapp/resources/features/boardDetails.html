@@ -28,7 +28,7 @@
 				<th  class="text-center">Description</th>
 			</tr>
 
-			<tr data-ng-repeat="story in boardDetail.story" class="active text-center">			
+			<tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory(story.story)">			
 				<td>{{story.story}}</td>
 				<td>{{story.storyName}}</td>
 				<td>{{story.storyPoints}}</td>
