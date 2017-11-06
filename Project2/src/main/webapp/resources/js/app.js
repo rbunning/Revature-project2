@@ -88,22 +88,22 @@ angular
 				boardNumber = boardId;
 				$location.path('/boardDetail');
 			}
-			$scope.addUser = function(boardId) {
-				boardNumber = boardId;
+			$scope.addUser = function() {
 				$location.path('/addAUser');
 			}
+
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
 			$scope.displayChart = function() {
-				$location.path('/homePage');
+				$location.path('/displayChart');
 			}
-			$http.get('listBoards').then(
-				function(response) {
-					$scope.boards = response.data;
-				}, function(response) {
-					console.log(response);
-				});
+//			$http.get('listBoards').then(
+//					function(response) {
+//						$scope.boards = response.data;
+//					}, function(response) {
+//						console.log(response);
+//					});
 		})
 		
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
@@ -132,7 +132,7 @@ angular
  						$location.path('/boardDetail');	
  					});		
  			};
-		})
+
 
 		.controller('logsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
@@ -376,4 +376,16 @@ angular
 					};
 
 				})
+					
+		.controller('displayChartCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			$http.get('getChart').then(function(response) {
+				var ctx = document.getElementById("myChart");
+				var myChart = new Chart(ctx, response.data);
+			}, function(response) {
+				console.log(response);
+			});
+		})
+
+
 				

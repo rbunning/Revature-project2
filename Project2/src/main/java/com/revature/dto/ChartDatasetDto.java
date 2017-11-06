@@ -6,16 +6,17 @@ import java.util.Arrays;
 public class ChartDatasetDto implements Serializable {
 
 	private static final long serialVersionUID = 7343446286048918735L;
-	private String label = "Points";
+	private String label = "Story Points";
 	private int[] data;
+	private String borderColor = "#3e95cd";
+	private boolean fill = false;
 
 	public ChartDatasetDto() {
 		super();
 	}
 
-	public ChartDatasetDto(String label, int[] data) {
+	public ChartDatasetDto(int[] data) {
 		super();
-		this.label = label;
 		this.data = data;
 	}
 
@@ -29,6 +30,14 @@ public class ChartDatasetDto implements Serializable {
 
 	public void setData(int[] data) {
 		this.data = data;
+	}
+
+	public String getBorderColor() {
+		return borderColor;
+	}
+
+	public boolean isFill() {
+		return fill;
 	}
 
 	@Override
