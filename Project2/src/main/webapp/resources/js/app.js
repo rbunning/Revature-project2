@@ -2,6 +2,7 @@ window.onload = function() {
 }
 var scrumUser = {};
 var boardNumber = 2;
+var storyNumber = 0;
 
 angular
 		.module('jabrApp', [ 'ngRoute' ])
@@ -91,7 +92,6 @@ angular
 				boardNumber = boardId;
 				$location.path('/addAUser');
 			}
-
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
@@ -99,21 +99,39 @@ angular
 				$location.path('/homePage');
 			}
 			$http.get('listBoards').then(
-					function(response) {
-						$scope.boards = response.data;
-					}, function(response) {
-						console.log(response);
-					});
-
+				function(response) {
+					$scope.boards = response.data;
+				}, function(response) {
+					console.log(response);
+				});
 		})
 		
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
-//			$scope.scrumUser = scrumUser;
-//			$http.get('move').then(function(response) {
-//				$scope.logs = response.data;
-//			}, function(response) {
-//				console.log(response);
-//			});
+			$scope.scrumUser = scrumUser;
+			$http.get('listLanes').then(function(response) {		
+ 				$scope.lanes = response.data;		
+ 			}, function(response) {		
+ 				console.log(response);		
+ 			});	
+			$scope.submit = function() {		
+ 				var data = $.param({		
+ 					laneType : $scope.storylane,		
+ 					storyId : storyNumber
+ 				});		
+ 				var config = {		
+ 					headers : {		
+ 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'		
+ 					}		
+ 				}
+ 				$http.post('move', data, config).then(		
+ 					function(response) {		
+ 						$location.path('/boardDetail');		
+ 					}, function(response) {		
+ 						console.log(response);
+ 						// If something went wrong send the user back to board.
+ 						$location.path('/boardDetail');	
+ 					});		
+ 			};
 		})
 
 		.controller('logsCtrl', function($scope, $http, $location) {
@@ -151,7 +169,8 @@ angular
 
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
-			$scope.moveStory = function() {
+			$scope.moveStory = function(storyId) {
+				storyNumber = storyId;
 				$location.path('/moveStory');
 			}
 			var data = $.param({
