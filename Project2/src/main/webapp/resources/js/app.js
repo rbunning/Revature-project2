@@ -132,7 +132,7 @@ angular
  						$location.path('/boardDetail');	
  					});		
  			};
-
+		})
 
 		.controller('logsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
