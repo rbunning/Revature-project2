@@ -186,4 +186,13 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(Logs.class).list();
 	}
+ 
+	@Override
+	public Story updateStoryById(Story story) {
+		Session session = sessionFactory.getCurrentSession();
+		Story dbStory = (Story) session.get(Story.class, story.getStory());
+		dbStory.setLaneType(story.getLaneType());
+		session.update(dbStory);
+		return dbStory;
+	}
 }

@@ -35,35 +35,35 @@ public class AppService {
 		dao.createUserToBoard(newBoard, sUser);
 		return newBoard;
 	}
-	
+
 	public Story addNewStory(Story newStory) {
 		return dao.createStory(newStory);
 	}
-	
+
 	public void addUserToBoard(Board board, ScrumUser sUser) {
 		dao.createUserToBoard(board, sUser);
 	}
-	
+
 	public List<Board> getBoardList(ScrumUser sUser) {
 		return dao.getBoardList(sUser);
 	}
-	
+
 	public Board getBoardDetails(Board board) {
 		return dao.getBoardById(board);
 	}
-	
+
 	public List<ScrumUser> getUserList(Board board) {
 		return dao.getUserList(board);
 	}
-	
+
 	public List<ScrumUser> getAllUserList() {
 		return dao.getAllUserList();
 	}
-	
+
 	public List<LaneType> getLaneTypeList() {
 		return dao.getLaneTypes();
 	}
-	
+
 	public LaneType getLane(LaneType lane) {
 		return dao.getLaneById(lane);
 	}
@@ -71,24 +71,29 @@ public class AppService {
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		return dao.getUsersNotOnBoard(board);
 	}
-	
+
 	public List<Logs> getLogList() {
 		return dao.getLogs();
 	}
-	
+
 	public ScrumUser getScrumUserById(ScrumUser sUser) {
 		return dao.getScrumUserById(sUser);
 	}
-	
+
 	public Task addNewTask(Task newTask) {
 		newTask = dao.createTask(newTask);
-//		Story dbStory = dao.getStoryById(story);
-//		dao.createTaskToStory(dbStory, newTask);
-			//***might not need story to createTaskToStory, only need to get the story id to put into DB. 
+		// Story dbStory = dao.getStoryById(story);
+		// dao.createTaskToStory(dbStory, newTask);
+		// ***might not need story to createTaskToStory, only need to get the story id
+		// to put into DB.
 		return dao.createTask(newTask);
 	}
-	
+
 	public void addTaskToStory(Story story, Task task) {
 		dao.createTaskToStory(story, task);
+	}
+
+	public Story updateStory(Story story) {
+		return dao.updateStoryById(story);
 	}
 }

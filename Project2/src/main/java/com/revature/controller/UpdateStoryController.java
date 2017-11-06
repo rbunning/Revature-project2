@@ -32,8 +32,6 @@ public class UpdateStoryController {
 		// Get the id for the form and parses it to get the lane type selected
 		String i = request.getParameter("storyId");
 		newStory.setStory(Integer.parseInt(i));
-
-		return new ResponseEntity<Story>(newStory, HttpStatus.OK);
+		return new ResponseEntity<Story>(service.updateStory(newStory), HttpStatus.OK);
 	}
-
 }

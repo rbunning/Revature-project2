@@ -19,7 +19,7 @@ public interface Dao {
 	public Task createTask(Task t);
 
 	public void createTaskToStory(Story story, Task task);
-	
+
 	public Story createStory(Story s);
 
 	// READ
@@ -30,7 +30,7 @@ public interface Dao {
 	public Task getTaskById(Task t);
 
 	public List<Board> getBoardList(ScrumUser sUser);
-	
+
 	public Board getBoardById(Board board);
 
 	public List<ScrumUser> getUserList(Board board);
@@ -38,7 +38,7 @@ public interface Dao {
 	public List<ScrumUser> getAllUserList();
 
 	public List<LaneType> getLaneTypes();
-	
+
 	public List<Logs> getLogs();
 
 	public LaneType getLaneById(LaneType lane);
@@ -46,6 +46,8 @@ public interface Dao {
 	public List<ScrumUser> getUsersNotOnBoard(Board board);
 
 	// UPDATE
+
+	public Story updateStoryById(Story story);
 
 	// DELETE
 
