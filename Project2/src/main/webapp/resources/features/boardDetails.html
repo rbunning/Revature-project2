@@ -26,16 +26,14 @@
 				<th  class="text-center">Points</th>
 				<th  class="text-center">Lane</th>
 				<th  class="text-center">Description</th>
-				<th  class="text-center">Move Story</th>
 			</tr>
 
-			<tr data-ng-repeat="story in boardDetail.story" class="active text-center">			
+			<tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory()">			
 				<td>{{story.story}}</td>
 				<td>{{story.storyName}}</td>
 				<td>{{story.storyPoints}}</td>
 				<td>{{story.laneType.ltName}}</td>
 				<td>{{story.storyDesc}}</td>
-				<td><button class="text-center" data-ng-click="MoveStory()">Move</button></td>
 			</tr>		
 		</tbody>
 	</table>

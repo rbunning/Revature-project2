@@ -22,6 +22,9 @@ angular
 			}).when("/addStory", {
 				templateUrl : "resources/features/addStory.html",
 				controller : "addStoryCtrl"
+			}).when("/moveStory", {
+				templateUrl : "resources/features/moveStory.html",
+				controller : "moveStoryCtrl"
 			}).when("/logs", {
 				templateUrl : "resources/features/logs.html",
 				controller : "logsCtrl"
@@ -103,6 +106,15 @@ angular
 					});
 
 		})
+		
+		.controller('moveStoryCtrl', function($scope, $http, $location) {
+//			$scope.scrumUser = scrumUser;
+//			$http.get('move').then(function(response) {
+//				$scope.logs = response.data;
+//			}, function(response) {
+//				console.log(response);
+//			});
+		})
 
 		.controller('logsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
@@ -139,6 +151,9 @@ angular
 
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
+			$scope.moveStory = function() {
+				$location.path('/moveStory');
+			}
 			var data = $.param({
 				boardId : boardNumber
 			});
