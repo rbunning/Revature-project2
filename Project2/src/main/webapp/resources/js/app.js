@@ -98,12 +98,6 @@ angular
 			$scope.displayChart = function() {
 				$location.path('/displayChart');
 			}
-//			$http.get('listBoards').then(
-//					function(response) {
-//						$scope.boards = response.data;
-//					}, function(response) {
-//						console.log(response);
-//					});
 		})
 		
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
@@ -130,8 +124,9 @@ angular
  						console.log(response);
  						// If something went wrong send the user back to board.
  						$location.path('/boardDetail');	
- 					});		
- 			};
+ 					});	
+			}
+ 		})
 
 
 		.controller('logsCtrl', function($scope, $http, $location) {
