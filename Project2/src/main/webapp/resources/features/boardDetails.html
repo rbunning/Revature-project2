@@ -1,154 +1,53 @@
 <head>
-	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
 
 <div class="container">
-  <div class="jumbotron">
-    <h2 class="text-center" id="boardName">JAR'B Scrum Board: {{boardDetail.boardName}}</h2>
-  </div>
-  
-  <button style="float: right;"type="button" class="btn btn-primary" data-ng-show="isScrumMaster" data-ng-click="addAStory(boardDetail.boardId)">Add a Story</button>
-  <button style="float: right;"type="button" class="btn btn-primary" data-ng-show="isScrumMaster" data-ng-click="addUser()">Add a User</button>
-  <button style="float: right;"type="button" class="btn btn-primary" data-ng-show="isScrumMaster" data-ng-click="displayChart()">View Chart</button>
-  <br>
-  <br>
-  <div class="row">
-    <div data-ng-repeat="lane in lanes" class="col-xs-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{lane.ltName}}</h3>
-        </div>
+	<div class="jumbotron">
+		<h2 class="text-center" id="boardName">JAR'B Scrum Board:
+			{{boardDetail.boardName}}</h2>
+	</div>
 
-        <div class="panel-body">
-          <div data-ng-repeat="story in filterAllStoriesByLane(lane.ltId)" style="border-top: solid">
-            <a style="float: left" data-ng-hide="$parent.$first" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-left"></span>
-            </a>
-            <span class="label label-default">Points {{story.storyPoints}}</span>
-            <a style="float: right" data-ng-hide="$parent.$last" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-right"></span>
-            </a>
-            <br />
-            <span>{{story.storyDesc}}</span>
+	<button style="float: right;" type="button" class="btn btn-primary"
+		data-ng-show="isScrumMaster"
+		data-ng-click="addAStory(boardDetail.boardId)">Add a Story</button>
+	<button style="float: right;" type="button" class="btn btn-primary"
+		data-ng-show="isScrumMaster" data-ng-click="addUser()">Add a
+		User</button>
+	<button style="float: right;" type="button" class="btn btn-primary"
+		data-ng-show="isScrumMaster" data-ng-click="displayChart()">View
+		Chart</button>
+	<br> <br>
+	<div class="row">
+		<div data-ng-repeat="lane in lanes" class="col-xs-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{lane.ltName}}</h3>
+				</div>
 
+				<div class="panel-body">
+					<div data-ng-repeat="story in filterAllStoriesByLane(lane.ltId)"
+						style="border-top: solid">
+						<a style="float: left" data-ng-hide="$parent.$first"
+							data-ng-click="moveStory(story.story)"> <span
+							class="glyphicon glyphicon-triangle-left"></span>
+						</a> <span class="label label-default">Points
+							{{story.storyPoints}}</span> <a style="float: right"
+							data-ng-hide="$parent.$last"
+							data-ng-click="moveStory(story.story)"> <span
+							class="glyphicon glyphicon-triangle-right"></span>
+						</a> <br /> <span>{{story.storyDesc}}</span>
 
 						<div class="checkbox" data-ng-repeat="task in story.task">
-			              <label>
-			                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
-			              </label>
-				        </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- <div id="displayEntries">
-
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr class="info">
-				<th  class="text-center">Board ID</th>
-				<th  class="text-center">Board Name</th>
-			</tr>
-			<tr class= "active">
-				<td class="info text-center">{{boardDetail.boardId}}</td>
-				<td class="info text-center">{{boardDetail.boardName}}</td>
-			</tr>
-		</thead>
-	</table>
-
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries">
-			<tr class="active">
-				<th  class="text-center">Story ID</th>
-				<th  class="text-center">Story Name</th>
-				<th  class="text-center">Points</th>
-				<th  class="text-center">Lane</th>
-				<th  class="text-center">Description</th>
-			</tr>
-
-     <tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory(story.story)">			
-				<td data-ng-click = "goToAddTask(story.story)" onmouseover="" style="cursor: pointer;">{{story.story}}</td>
-				<td>{{story.storyName}}</td>
-				<td>{{story.storyPoints}}</td>
-				<td>{{story.laneType.ltName}}</td>
-				<td>{{story.storyDesc}}</td>
-			</tr>		
-		</tbody>
-	</table>
-
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries" data-ng-repeat="story in boardDetail.story">
-			<tr class="active">
-				<th  class="text-center">Task ID</th>
-				<th  class="text-center">Task Description</th>
-			</tr>
-
-			<tr data-ng-repeat="t in story.task" class="active text-center">
-				<td>{{t.taskId}}</td>
-				<td>{{t.description}}</td>
-			</tr>
+							<label> <input type="checkbox"
+								data-ng-model="task.status" data-ng-true-value="1"
+								data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
+							</label>
+						</div>
+					</div>
+				</div>
 			</div>
-
-		</tbody>
-	</table>
-	Board Users
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries">
-			<tr class="active">
-				<th  class="text-center">User ID</th>
-				<th  class="text-center">First Name</th>
-				<th  class="text-center">Last Name</th>
-				<th  class="text-center">Role</th>
-			</tr>
-
-			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">
-				<td>{{scrumUser.scrumUserId}}</td>
-				<td>{{scrumUser.scrumUserFirstname}}</td>
-				<td>{{scrumUser.scrumUserLastname}}</td>
-				<td>{{scrumUser.roleType.roleName}}</td>
-			</tr>
-		</tbody>
-	</table>
-	All Users
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries">
-			<tr class="active">
-				<th  class="text-center">User ID</th>
-				<th  class="text-center">First Name</th>
-				<th  class="text-center">Last Name</th>
-				<th  class="text-center">Role</th>
-			</tr>
-
-			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">
-				<td>{{scrumUser.scrumUserId}}</td>
-				<td>{{scrumUser.scrumUserFirstname}}</td>
-				<td>{{scrumUser.scrumUserLastname}}</td>
-				<td>{{scrumUser.roleType.roleName}}</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries">
-			<tr class="active">
-				<th  class="text-center">lane Id</th>
-				<th  class="text-center">lane Name</th>
-			</tr>
-
-			<tr data-ng-repeat="lane in lanes" class="active text-center">
-				<td>{{lane.ltId}}</td>
-				<td>{{lane.ltName}}</td>
-			</tr>
-		</tbody>
-	</table>
+		</div>
+	</div>
 </div>
-
-
- -->
