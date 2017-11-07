@@ -72,9 +72,6 @@ angular
 			$scope.addTask = function() {
 				$location.path('/addTask');
 			}
-			$scope.addAStory = function() {
-				$location.path('/addStory');
-			}
 			$scope.listLogs = function() {
 				$location.path('/logs');
 			}
@@ -94,10 +91,6 @@ angular
 				boardNumber = boardId;
 				$location.path('/boardDetail');
 			}
-			$scope.addUser = function() {
-				$location.path('/addAUser');
-			}
-
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
@@ -178,6 +171,12 @@ angular
 			}
 			$scope.addAStory = function() {
 				$location.path('/addStory');
+			}
+			$scope.addUser = function() {
+				$location.path('/addAUser');
+			}
+			$scope.displayChart = function() {
+				$location.path('/displayChart');
 			}
 			$scope.filterAllStoriesByLane = function(ltId) {
 				let stories = $scope.boardDetail.story;
