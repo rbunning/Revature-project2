@@ -32,12 +32,12 @@ public class NewStoryController {
 	@RequestMapping(value = "/newStory", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Story> addStory(Story newStory, HttpServletRequest request) {
 		
-		// Get the id for the form and parses it to get the board selected
-		String b = request.getParameter("boardId");
-		Board board = service.getBoardDetails(new Board(Integer.parseInt(b)));
+		// Sets the current board to the board in the session cookie.
+		HttpSession session = request.getSession();
+		Board board = (Board) session.getAttribute("board");
 		newStory.setBoard(board);
 		
-		// Sets the lane type to backlog
+		// Sets the lane type to backlog.
 		LaneType lane = service.getLane(new LaneType(1, null));
 		newStory.setLaneType(lane);
 
