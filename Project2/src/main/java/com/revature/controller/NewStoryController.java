@@ -37,15 +37,13 @@ public class NewStoryController {
 		Board board = service.getBoardDetails(new Board(Integer.parseInt(b)));
 		newStory.setBoard(board);
 		
-		// Get the id for the form and parses it to get the lane type selected
-		String l = request.getParameter("laneTypeId");
-		LaneType lane = service.getLane(new LaneType(Integer.parseInt(l), null));
+		// Sets the lane type to backlog
+		LaneType lane = service.getLane(new LaneType(1, null));
 		newStory.setLaneType(lane);
 
-		// the current date when the story was add. 
+		// The current date when the story was add. 
 		newStory.setLastMoveDate(Date.valueOf(LocalDate.now()));
 		
-		//newStory = new Story(new Board(41, "RBs board"), new LaneType(1, "Backlog"), "bob", 10, null, null);
 		return new ResponseEntity<Story>(service.addNewStory(newStory), HttpStatus.OK);
 	}
 }
