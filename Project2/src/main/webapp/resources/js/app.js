@@ -265,6 +265,11 @@ angular
 		})
 
 		.controller('listBoardCtrl', function($scope, $http, $location) {
+			  $scope.boardDetails = function(boardId) {
+				boardNumber = boardId;
+				$location.path('/boardDetail');
+			}
+
 			$scope.scrumUser = scrumUser;
 			$http.get('listBoards').then(function(response) {
 				$scope.boards = response.data;
