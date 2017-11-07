@@ -10,10 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.beans.ScrumUser;
+import com.revature.beans.Story;
 import com.revature.beans.Task;
+import com.revature.dto.TaskDTO;
 import com.revature.service.AppService;
 
 @Controller
@@ -22,18 +23,23 @@ public class NewTaskController {
 	@Autowired
 	AppService service;
 	
-	@RequestMapping("/newTask")
-	public ModelAndView addTask() {
-		return new ModelAndView("/resources/features/addTask.html");
-	}
+//	@RequestMapping("/newTask")
+//	public ModelAndView addTask() {
+//		return new ModelAndView("/resources/features/addTask.html");
+//	}
 	
 	@RequestMapping(value = "/newTask", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity <Task> addTask(Task newTask, HttpServletRequest request) {
+	public ResponseEntity <Task> addTask(TaskDTO newTask, HttpServletRequest request) {
+		//public ResponseEntity <Task> addTask(TaskDTO newTask, HttpServletRequest request) {
+		System.out.println("Testing new Task");
+		System.out.println("New task is: " + newTask);
 		HttpSession session = request.getSession();
 		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
-		
-		newTask = service.addNewTask(newTask);
-		return new ResponseEntity<Task>(newTask, HttpStatus.OK);
+		Story story = service.getStoryById(newTask.getStoryId());
+		Task t = new Task(story, newTask.getTaskDescription());
+		System.out.println("Task t = " + t);
+		t = service.addNewTask(t);
+		return new ResponseEntity<Task>(t, HttpStatus.OK);
 	}
 	
 }

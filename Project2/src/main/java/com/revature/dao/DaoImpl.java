@@ -19,6 +19,7 @@ import com.revature.beans.Logs;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
+import com.revature.dto.TaskDTO;
 
 @Repository
 @Transactional
@@ -46,7 +47,6 @@ public class DaoImpl implements Dao {
 		return dbUser;
 	}
 
-	// Creates a new Task and save it to the DB.
 	@Override
 	public Task createTask(Task t) {
 		Session session = sessionFactory.getCurrentSession();
@@ -63,7 +63,6 @@ public class DaoImpl implements Dao {
 	}
 
 	// Get an existing Task from the DB.
-	// Can delete this if not needed
 	@Override
 	public Task getTaskById(Task t) {
 		Session session = sessionFactory.getCurrentSession();
@@ -151,19 +150,19 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(LaneType.class).list();
 	}
-	
+
 	@Override
 	public LaneType getLaneById(LaneType lane) {
 		Session session = sessionFactory.getCurrentSession();
 		return (LaneType) session.get(LaneType.class, lane.getLtId());
 	}
-    
+
 	@Override
 	public List<ScrumUser> getUsersNotOnBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		List<ScrumUser> userList = session.createCriteria(ScrumUser.class).list();
 		List<ScrumUser> usersNotOnBoard = new ArrayList<>();
-		
+
 		for (ScrumUser su : userList) {
 			su.getBoards().size();
 			boolean onBoard = false;
@@ -182,6 +181,13 @@ public class DaoImpl implements Dao {
 	}
 	
 	@Override
+	public Story getStoryById(int storyId) {
+		Session session = sessionFactory.getCurrentSession();
+		Story story = (Story) session.get(Story.class, storyId);
+		return story;
+  }
+  
+  @Override
 	public List<Logs> getLogs() {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(Logs.class).list();
