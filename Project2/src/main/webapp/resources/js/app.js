@@ -15,8 +15,8 @@ angular
 				templateUrl : "resources/features/login.html",
 				controller : "loginCtrl"
 			}).when("/homePage", {
-				templateUrl : "resources/features/homePage.html",
-				controller : "homeController"
+				templateUrl : "resources/features/boardDetails.html",
+				controller : "boardDetailsCtrl"
 			}).when("/addBoard", {
 				templateUrl : "resources/features/addBoard.html",
 				controller : "addBoardCtrl"
@@ -274,7 +274,11 @@ angular
 		})
 
 		.controller('homeController', function($scope, $location) {
-			$scope.scrumUser = scrumUser;
+//			$scope.scrumUser = scrumUser;
+			$scope.boardDetails = function(boardId) {
+				boardNumber = boardId;
+				$location.path('/boardDetail');
+			}
 		})
 
 		.controller(
