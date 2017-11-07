@@ -16,7 +16,7 @@ body {
     border: 3px solid;
 }
 
-#usernameLabel, #passwordLabel, #submitLabel, #msgLabel, #navbarContent{
+#usernameLabel, #passwordLabel, #submitLabel, #msgLabel, #navbarContent, #boardName{
 	font-family: 'Dosis', sans-serif;
 }
 
@@ -51,8 +51,7 @@ body {
     border: 5px solid white;
     box-shadow: 1px 3px 2px grey;
 }
-
-#textboxId
-{
+ 
+#textboxId {
     width:350px;
 }

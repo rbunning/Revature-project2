@@ -4,10 +4,12 @@
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
 
 <div class="container">
-  <h1 class="info text-center">JAR'B Scrum Board</h1>
   <div class="jumbotron">
-    <p>{{boardDetail.boardName}}</p>
+    <h2 class="text-center" id="boardName">JAR'B Scrum Board: {{boardDetail.boardName}}</h2>
   </div>
+  <button style="float: right;"type="button" class="btn btn-primary" data-ng-click="addAStory(boardDetail.boardId)">Add a Story</button>
+  <br>
+  <br>
   <div class="row">
     <div data-ng-repeat="lane in lanes" class="col-xs-2">
       <div class="panel panel-default">
@@ -27,38 +29,13 @@
             <br />
             <span>{{story.storyDesc}}</span>
 
-            <!-- Modal for all tasks under one story -->
-            <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Tasks</button>
- -->
-             <!--  <div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog">
 
-			      Modal content
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">tasks</h4>
-			        </div>
-			        <div class="modal-body">
-				        <div class="checkbox" data-ng-repeat="task in story.task">
-			              <label>
-			                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
-			              </label>
-				        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        </div>
-			      </div>
-                </div>
- 			  </div>
-			</div> -->
-			
 						<div class="checkbox" data-ng-repeat="task in story.task">
 			              <label>
 			                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
 			              </label>
 				        </div>
-			
+
           </div>
         </div>
 
@@ -68,7 +45,7 @@
 </div>
 
 
-<div id="displayEntries">
+<!-- <div id="displayEntries">
 
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -171,3 +148,4 @@
 </div>
 
 
+ -->
