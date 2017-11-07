@@ -51,8 +51,7 @@ body {
     border: 5px solid white;
     box-shadow: 1px 3px 2px grey;
 }
-
-#textboxId
-{
+ 
+#textboxId {
     width:350px;
 }
