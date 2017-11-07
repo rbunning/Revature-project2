@@ -41,7 +41,9 @@ public class GetBurndownChart {
 		int totalPoints = 0;
 
 		for (Story story : stories) {
-			totalPoints += story.getStoryPoints();
+			if (story.getLaneType().getLtId() != 1) {
+				totalPoints += story.getStoryPoints();
+			}
 			if (story.getLaneType().getLtId() == 6) {
 				LocalDate doneDate = story.getLastMoveDate().toLocalDate();
 				storyData.put(doneDate, story.getStoryPoints());
