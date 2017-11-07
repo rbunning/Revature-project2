@@ -3,6 +3,8 @@ window.onload = function() {
 
 var scrumUser = {};
 var boardNumber = 2;
+var currentStory = 0;
+var storyNow = {};
 var storyNumber = 0;
 
 angular
@@ -67,6 +69,9 @@ angular
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
 			}
+			$scope.addTask = function() {
+				$location.path('/addTask');
+			}
 			$scope.addAStory = function() {
 				$location.path('/addStory');
 			}
@@ -99,12 +104,6 @@ angular
 			$scope.displayChart = function() {
 				$location.path('/displayChart');
 			}
-//			$http.get('listBoards').then(
-//					function(response) {
-//						$scope.boards = response.data;
-//					}, function(response) {
-//						console.log(response);
-//					});
 		})
 
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
@@ -194,12 +193,23 @@ angular
 			}
 			//gets all the details for this board except users
 			$http.post('boardDetails', data, config).then(
-					function(response) {
+					 function(response) {
 						$scope.boardDetail = response.data;
+						$scope.goToAddTask = function(storyId) {
+							$location.path('/addTask');
+							currentStory = storyId;
+						}
+						
 					}, function(response) {
 						console.log(response);
 					});
-			//need a separate call to get user list - not part of board to prevent JSON infinite recursion
+					var config = {
+						headers : {
+							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+						}
+					}
+					// need a separate call to get user list - not part of board
+					// to prevent JSON infinite recursion
 			$http.get('boardUsers').then(
 					function(response) {
 						$scope.boardUsers = response.data;
@@ -384,21 +394,27 @@ angular
 				"addTaskCtrl",
 				function($scope, $http, $location) {
 					$scope.scrumUser = scrumUser;
+					console.log("testing addTaskCtrl")
 					$scope.addTask = function() {
+						console.log("desctription:" + $scope.taskDescription);
+						console.log("storyID:" + currentStory);
 						var data = $.param({
-							description : $scope.taskDescription
+							taskDescription : $scope.taskDescription,
+							storyId : currentStory 
 						});
 						var config = {
 							headers : {
 								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 							}
 						}
-						$http.post('newTask', data, config).then(
-								function(response) {
-									$location.path('/homePage');
-								}, function(response) {
-									console.log(response);
-								});
+									$http.post('newTask', data, config).then(
+											function(response) {
+												$location.path('/homePage');
+												console.log("New Task data: " + response.data)
+											}, function(response) {
+												console.log(response);
+											});
+
 					};
 
 				})

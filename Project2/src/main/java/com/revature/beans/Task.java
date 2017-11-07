@@ -45,6 +45,12 @@ public class Task implements Serializable {
 		this.story = story;
 		this.description = description;
 	}
+	
+	public Task(Story story, String description) {
+		super();
+		this.story = story;
+		this.description = description;
+	}
 
 	public int getTaskId() {
 		return taskId;
