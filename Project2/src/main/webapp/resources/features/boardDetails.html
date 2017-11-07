@@ -7,7 +7,7 @@
   <div class="jumbotron">
     <h2 class="text-center" id="boardName">JAR'B Scrum Board: {{boardDetail.boardName}}</h2>
   </div>
-  <button style="float: right;"type="button" class="btn btn-primary" data-ng-click="addAStory(boardDetail.boardId)">Add a Story</button>
+  <button style="float: right;"type="button" class="btn btn-primary" data-ng-show="isScrumMaster" data-ng-click="addAStory(boardDetail.boardId)">Add a Story</button>
   <br>
   <br>
   <div class="row">

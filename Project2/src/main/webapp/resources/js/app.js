@@ -169,9 +169,15 @@ angular
 
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
+			if ($scope.scrumUser.roleId.roleId == 2) {
+				$scope.isScrumMaster = true;
+			}
 			$scope.moveStory = function(storyId) {
 				storyNumber = storyId;
 				$location.path('/moveStory');
+			}
+			$scope.addAStory = function() {
+				$location.path('/addStory');
 			}
 			$scope.filterAllStoriesByLane = function(ltId) {
 				let stories = $scope.boardDetail.story;
