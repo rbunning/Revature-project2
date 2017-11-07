@@ -14,6 +14,9 @@ angular
 			$routeProvider.when("/", {
 				templateUrl : "resources/features/login.html",
 				controller : "loginCtrl"
+			}).when("/logout", {
+				templateUrl : "resources/features/login.html",
+				controller : "logoutCtrl"
 			}).when("/homePage", {
 				templateUrl : "resources/features/boardDetails.html",
 				controller : "boardDetailsCtrl"
@@ -85,7 +88,7 @@ angular
 				$location.path('/boardInfo')
 			}
 			$scope.logout = function() {
-				$location.path('/');
+				$location.path('/logout');
 			}
 			$scope.boardDetails = function(boardId) {
 				boardNumber = boardId;
@@ -432,5 +435,17 @@ angular
 			});
 		})
 
+		.controller('logoutCtrl', function($scope, $http, $location) {
+			scrumUser = {};
+			boardNumber = 2;
+			currentStory = 0;
+			storyNow = {};
+			storyNumber = 0;
+			$http.get('logout').then(function(response) {
+				$location.path('/');
+			}, function(response) {
+				$location.path('/');
+			});
+		})
 
 
