@@ -173,6 +173,14 @@ angular
 				storyNumber = storyId;
 				$location.path('/moveStory');
 			}
+			$scope.filterAllStoriesByLane = function(ltId) {
+				let stories = $scope.boardDetail.story;
+				return stories.filter(story => story.ltId == ltId);
+			}
+			
+			$scope.filterStory = function(stories, laneId) {
+				return stories.filter(story => story.ltId == laneId);
+			}
 			var data = $.param({
 				boardId : boardNumber
 			});

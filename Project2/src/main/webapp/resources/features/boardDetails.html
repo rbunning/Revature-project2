@@ -4,7 +4,7 @@
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
 
 <div id="displayEntries">
-	
+
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="info">
@@ -14,10 +14,10 @@
 			<tr class= "active">
 				<td class="info text-center">{{boardDetail.boardId}}</td>
 				<td class="info text-center">{{boardDetail.boardName}}</td>
-			</tr>	
+			</tr>
 		</thead>
 	</table>
-	
+
 	<table class="table table-bordered table-hover">
 		<tbody id="allEntries">
 			<tr class="active">
@@ -28,16 +28,16 @@
 				<th  class="text-center">Description</th>
 			</tr>
 
-			<tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory(story.story)">			
+			<tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory(story.story)">
 				<td>{{story.story}}</td>
 				<td>{{story.storyName}}</td>
 				<td>{{story.storyPoints}}</td>
 				<td>{{story.laneType.ltName}}</td>
 				<td>{{story.storyDesc}}</td>
-			</tr>		
+			</tr>
 		</tbody>
 	</table>
-	
+
 	<table class="table table-bordered table-hover">
 		<tbody id="allEntries" data-ng-repeat="story in boardDetail.story">
 			<tr class="active">
@@ -45,12 +45,12 @@
 				<th  class="text-center">Task Description</th>
 			</tr>
 
-			<tr data-ng-repeat="t in story.task" class="active text-center">			
+			<tr data-ng-repeat="t in story.task" class="active text-center">
 				<td>{{t.taskId}}</td>
 				<td>{{t.description}}</td>
 			</tr>
 			</div>
-					
+
 		</tbody>
 	</table>
 	Board Users
@@ -63,12 +63,12 @@
 				<th  class="text-center">Role</th>
 			</tr>
 
-			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">			
+			<tr data-ng-repeat="scrumUser in boardUsers" class="active text-center">
 				<td>{{scrumUser.scrumUserId}}</td>
 				<td>{{scrumUser.scrumUserFirstname}}</td>
 				<td>{{scrumUser.scrumUserLastname}}</td>
 				<td>{{scrumUser.roleType.roleName}}</td>
-			</tr>		
+			</tr>
 		</tbody>
 	</table>
 	All Users
@@ -81,15 +81,15 @@
 				<th  class="text-center">Role</th>
 			</tr>
 
-			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">			
+			<tr data-ng-repeat="scrumUser in allUsers" class="active text-center">
 				<td>{{scrumUser.scrumUserId}}</td>
 				<td>{{scrumUser.scrumUserFirstname}}</td>
 				<td>{{scrumUser.scrumUserLastname}}</td>
 				<td>{{scrumUser.roleType.roleName}}</td>
-			</tr>		
+			</tr>
 		</tbody>
 	</table>
-	
+
 	<table class="table table-bordered table-hover">
 		<tbody id="allEntries">
 			<tr class="active">
@@ -97,16 +97,16 @@
 				<th  class="text-center">lane Name</th>
 			</tr>
 
-			<tr data-ng-repeat="lane in lanes" class="active text-center">			
+			<tr data-ng-repeat="lane in lanes" class="active text-center">
 				<td>{{lane.ltId}}</td>
 				<td>{{lane.ltName}}</td>
-			</tr>		
+			</tr>
 		</tbody>
 	</table>
 </div>
 
 <div class="container">
-  <h1>JAR'B Scrum Board</h1>
+  <h1 class="info text-center">JAR'B Scrum Board</h1>
   <div class="jumbotron">
     <p>{{boardDetail.boardName}}</p>
   </div>
@@ -116,8 +116,9 @@
         <div class="panel-heading">
           <h3 class="panel-title">{{lane.ltName}}</h3>
         </div>
-<!--         <div class="panel-body">
-          <div data-ng-repeat="story in filterStoryByLane(lane.LtId)" style="border-top: solid">
+
+        <div class="panel-body">
+          <div data-ng-repeat="story in boardDetail.story" style="border-top: solid">
             <a style="float: left" data-ng-hide="$parent.$first" data-ng-click="moveStory(story.story)">
               <span class="glyphicon glyphicon-triangle-left"></span>
             </a>
@@ -127,13 +128,14 @@
             </a>
             <br />
             <span>{{story.storyDesc}}</span>
-            <div class="checkbox" data-ng-repeat="task in story.task">
+<!--             <div class="checkbox" data-ng-repeat="task in story.task">
               <label>
                 <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
               </label>
-            </div>
+            </div> -->
           </div>
-        </div> -->
+        </div>
+
       </div>
     </div>
   </div>
