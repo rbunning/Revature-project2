@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="CHART")
@@ -25,7 +27,8 @@ public class Chart implements Serializable {
 	@GeneratedValue(generator="C_SEQ", strategy=GenerationType.SEQUENCE)
 	private int chartId;
 	
-	@ManyToOne
+	@JsonIgnore
+	@OneToOne
 	@JoinColumn(name="BOARD_ID")
 	private Board board;
 	
@@ -33,20 +36,17 @@ public class Chart implements Serializable {
 	private String chartTitle;
 	@Column(name="START_DATE")
 	private Date startDate;
-	@Column(name="END_DATE")
-	private Date endDate;
 	
 	public Chart() {
 		super();
 	}
 
-	public Chart(int chardId, Board board, String chartTitle, Date startDate, Date endDate) {
+	public Chart(int chardId, Board board, String chartTitle, Date startDate) {
 		super();
 		this.chartId = chardId;
 		this.board = board;
 		this.chartTitle = chartTitle;
 		this.startDate = startDate;
-		this.endDate = endDate;
 	}
 
 	public int getChardId() {
@@ -81,14 +81,6 @@ public class Chart implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -96,6 +88,6 @@ public class Chart implements Serializable {
 	@Override
 	public String toString() {
 		return "Chart [chardId=" + chartId + ", boardId=" + board + ", chartTitle=" + chartTitle + ", startDate="
-				+ startDate + ", endDate=" + endDate + "]";
+				+ startDate + "]";
 	}
 }

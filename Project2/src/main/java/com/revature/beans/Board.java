@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +26,9 @@ public class Board implements Serializable {
 
 	private static final long serialVersionUID = -4064729888746010349L;
 
+	@OneToOne(mappedBy = "board")
+	private Chart chart;
+	
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	private Set<Story> story = new HashSet<Story>();
 	@JsonIgnore
@@ -58,6 +62,14 @@ public class Board implements Serializable {
 		super();
 		this.boardId = boardId;
 		this.boardName = boardName;
+	}
+
+	public Chart getChart() {
+		return chart;
+	}
+
+	public void setChart(Chart chart) {
+		this.chart = chart;
 	}
 
 	public Set<Story> getStory() {

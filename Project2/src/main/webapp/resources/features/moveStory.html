@@ -1,0 +1,13 @@
+<head>
+	<link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
+
+<h1>Move Story</h1>
+<br>
+<h4>Lane Type</h4>
+<select data-ng-model="storylane">
+	<option data-ng-repeat="lane in lanes" value="{{lane.ltId}}">{{lane.ltName}}</option>
+</select>
+<br>
+<button data-ng-click="submit()" class="btn btn-default">Move</button>

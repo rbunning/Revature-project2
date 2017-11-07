@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Board;
 import com.revature.beans.LaneType;
+import com.revature.beans.Logs;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
@@ -184,5 +185,20 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		Story story = (Story) session.get(Story.class, storyId);
 		return story;
+  }
+  
+  @Override
+	public List<Logs> getLogs() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(Logs.class).list();
+	}
+ 
+	@Override
+	public Story updateStoryById(Story story) {
+		Session session = sessionFactory.getCurrentSession();
+		Story dbStory = (Story) session.get(Story.class, story.getStory());
+		dbStory.setLaneType(story.getLaneType());
+		session.update(dbStory);
+		return dbStory;
 	}
 }
