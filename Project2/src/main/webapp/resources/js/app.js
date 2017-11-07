@@ -2,6 +2,7 @@ window.onload = function() {
 }
 var scrumUser = {};
 var boardNumber = 2;
+var storyNumber = 0;
 
 angular
 		.module('jabrApp', [ 'ngRoute' ])
@@ -22,6 +23,9 @@ angular
 			}).when("/addStory", {
 				templateUrl : "resources/features/addStory.html",
 				controller : "addStoryCtrl"
+			}).when("/moveStory", {
+				templateUrl : "resources/features/moveStory.html",
+				controller : "moveStoryCtrl"
 			}).when("/logs", {
 				templateUrl : "resources/features/logs.html",
 				controller : "logsCtrl"
@@ -87,7 +91,7 @@ angular
 			$scope.addUser = function() {
 				$location.path('/addAUser');
 			}
-			
+
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
@@ -100,6 +104,34 @@ angular
 //					}, function(response) {
 //						console.log(response);
 //					});
+		})
+		
+		.controller('moveStoryCtrl', function($scope, $http, $location) {
+			$scope.scrumUser = scrumUser;
+			$http.get('listLanes').then(function(response) {		
+ 				$scope.lanes = response.data;		
+ 			}, function(response) {		
+ 				console.log(response);		
+ 			});	
+			$scope.submit = function() {		
+ 				var data = $.param({		
+ 					laneTypeId : $scope.storylane,		
+ 					storyId : storyNumber
+ 				});		
+ 				var config = {		
+ 					headers : {		
+ 						'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'		
+ 					}		
+ 				}
+ 				$http.post('update', data, config).then(		
+ 					function(response) {		
+ 						$location.path('/boardDetail');		
+ 					}, function(response) {		
+ 						console.log(response);
+ 						// If something went wrong send the user back to board.
+ 						$location.path('/boardDetail');	
+ 					});		
+ 			};
 		})
 
 		.controller('logsCtrl', function($scope, $http, $location) {
@@ -137,6 +169,10 @@ angular
 
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
+			$scope.moveStory = function(storyId) {
+				storyNumber = storyId;
+				$location.path('/moveStory');
+			}
 			var data = $.param({
 				boardId : boardNumber
 			});
