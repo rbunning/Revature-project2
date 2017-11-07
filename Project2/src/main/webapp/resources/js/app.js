@@ -17,6 +17,9 @@ angular
 			$routeProvider.when("/", {
 				templateUrl : "resources/features/login.html",
 				controller : "loginCtrl"
+			}).when("/logout", {
+				templateUrl : "resources/features/login.html",
+				controller : "logoutCtrl"
 			}).when("/homePage", {
 				templateUrl : "resources/features/boardDetails.html",
 				controller : "boardDetailsCtrl"
@@ -75,9 +78,6 @@ angular
 			$scope.addTask = function() {
 				$location.path('/addTask');
 			}
-			$scope.addAStory = function() {
-				$location.path('/addStory');
-			}
 			$scope.listLogs = function() {
 				$location.path('/logs');
 			}
@@ -91,14 +91,11 @@ angular
 				$location.path('/boardInfo')
 			}
 			$scope.logout = function() {
-				$location.path('/');
+				$location.path('/logout');
 			}
 			$scope.boardDetails = function(boardId) {
 				boardNumber = boardId;
 				$location.path('/boardDetail');
-			}
-			$scope.addUser = function() {
-				$location.path('/addAUser');
 			}
 			$scope.configChart = function() {
 				$location.path('/listBoard');
@@ -179,12 +176,22 @@ angular
 			$scope.isDev = isDev;
 			$scope.isQA = isQA;
 			
+
 			$scope.moveStory = function(storyId) {
 				storyNumber = storyId;
 				$scope.isScrumMaster = isScrumMaster;
 				$scope.isDev = isDev;
 				$scope.isQA = isQA;
 				$location.path('/moveStory');
+			}
+			$scope.addAStory = function() {
+				$location.path('/addStory');
+			}
+			$scope.addUser = function() {
+				$location.path('/addAUser');
+			}
+			$scope.displayChart = function() {
+				$location.path('/displayChart');
 			}
 			$scope.filterAllStoriesByLane = function(ltId) {
 				let stories = $scope.boardDetail.story;
@@ -271,8 +278,6 @@ angular
  			});
  			$scope.submit = function() {
  				var data = $.param({
- 					boardId : $scope.storyboard,
- 					laneTypeId : $scope.storylane,
  					storyName : $scope.storyname,
  					storyPoints : $scope.storypoint,
  					storyDesc : $scope.storydescription
@@ -448,5 +453,17 @@ angular
 			});
 		})
 
+		.controller('logoutCtrl', function($scope, $http, $location) {
+			scrumUser = {};
+			boardNumber = 2;
+			currentStory = 0;
+			storyNow = {};
+			storyNumber = 0;
+			$http.get('logout').then(function(response) {
+				$location.path('/');
+			}, function(response) {
+				$location.path('/');
+			});
+		})
 
 

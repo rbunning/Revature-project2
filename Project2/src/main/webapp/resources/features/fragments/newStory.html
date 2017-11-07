@@ -11,16 +11,19 @@
 <div class="container">
   <form>
     <div class="form-group">
+      <label for="sel2">Select a lane:</label>
+      <select class="form-control" id="sel2" data-ng-model="storylane">
+        <option data-ng-repeat="lane in lanes" value="{{lane.ltId}}">{{lane.ltName}}</option>
+      </select>
+      <br>
       <label for="sel3">Select Story Point:</label>
       <select class="form-control" id="sel3" data-ng-model="storypoint">
         <option ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" value="{{i}}">{{i}}</option>
       </select>
       <br>
-
       <label for="name">Story Name:</label>
       <input class="form-control" id="name" data-ng-model="storyname" type="text" placeholder="Enter name for new story">
       <br>
-
       <label for="comment">Description</label>
       <textarea class="form-control" rows="5" id="comment"   data-ng-model="storydescription" rows="4" cols="30"></textarea>
       <br>
