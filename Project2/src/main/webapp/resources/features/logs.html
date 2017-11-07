@@ -13,15 +13,15 @@
 			<tr class="active">
 				<th class="text-center">Date</th>
 				<th class="text-center">level</th>
-				<th class="text-center">Logger</th>
 				<th class="text-center">Message</th>
+				<th class="text-center">Logger</th>
 			</tr>
 
 			<tr data-ng-repeat="log in logs" class="active text-center">			
 				<td>{{log.logsDated}}</td>
 				<td>{{log.logsLevel}}</td>
-				<td>{{log.logsLogger}}</td>
 				<td>{{log.logsMessage}}</td>
+				<td>{{log.logsLogger}}</td>
 			</tr>		
 		</tbody>
 		<tfoot>

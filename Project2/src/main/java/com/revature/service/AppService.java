@@ -23,8 +23,7 @@ public class AppService {
 	public ScrumUser getScrumUserByUsername(ScrumUser sUser) {
 		ScrumUser loggedInUser = dao.getScrumUserByUsername(sUser);
 
-		// if returned user is not null and passwords don't match, set the returned user
-		// to null
+		// if returned user is not null and passwords don't match, set the returned user to null
 		if (loggedInUser != null && !sUser.getScrumUserPassword().equals(loggedInUser.getScrumUserPassword())) {
 			loggedInUser = null;
 		}
