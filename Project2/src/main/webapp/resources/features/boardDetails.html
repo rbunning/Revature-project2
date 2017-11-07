@@ -3,6 +3,43 @@
 </head>
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
 
+<div class="container">
+  <h1 class="info text-center">JAR'B Scrum Board</h1>
+  <div class="jumbotron">
+    <p>{{boardDetail.boardName}}</p>
+  </div>
+  <div class="row">
+    <div data-ng-repeat="lane in lanes" class="col-xs-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{lane.ltName}}</h3>
+        </div>
+
+        <div class="panel-body">
+          <div data-ng-repeat="story in filterAllStoriesByLane(lane.ltId)" style="border-top: solid">
+            <a style="float: left" data-ng-hide="$parent.$first" data-ng-click="moveStory(story.story)">
+              <span class="glyphicon glyphicon-triangle-left"></span>
+            </a>
+            <span class="label label-default">Points {{story.storyPoints}}</span>
+            <a style="float: right" data-ng-hide="$parent.$last" data-ng-click="moveStory(story.story)">
+              <span class="glyphicon glyphicon-triangle-right"></span>
+            </a>
+            <br />
+            <span>{{story.storyDesc}}</span>
+            <div class="checkbox" data-ng-repeat="task in story.task">
+              <label>
+                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div id="displayEntries">
 
 	<table class="table table-bordered table-hover">
@@ -105,38 +142,4 @@
 	</table>
 </div>
 
-<div class="container">
-  <h1 class="info text-center">JAR'B Scrum Board</h1>
-  <div class="jumbotron">
-    <p>{{boardDetail.boardName}}</p>
-  </div>
-  <div class="row">
-    <div data-ng-repeat="lane in lanes" class="col-xs-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{lane.ltName}}</h3>
-        </div>
 
-        <div class="panel-body">
-          <div data-ng-repeat="story in boardDetail.story" style="border-top: solid">
-            <a style="float: left" data-ng-hide="$parent.$first" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-left"></span>
-            </a>
-            <span class="label label-default">Points {{story.storyPoints}}</span>
-            <a style="float: right" data-ng-hide="$parent.$last" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-right"></span>
-            </a>
-            <br />
-            <span>{{story.storyDesc}}</span>
-<!--             <div class="checkbox" data-ng-repeat="task in story.task">
-              <label>
-                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
-              </label>
-            </div> -->
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>

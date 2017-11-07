@@ -175,9 +175,11 @@ angular
 			}
 			$scope.filterAllStoriesByLane = function(ltId) {
 				let stories = $scope.boardDetail.story;
-				return stories.filter(story => story.ltId == ltId);
+				console.log($scope.boardDetail.story);
+				console.log(stories);
+				return stories.filter(story => story.laneType.ltId == ltId);
 			}
-			
+
 			$scope.filterStory = function(stories, laneId) {
 				return stories.filter(story => story.ltId == laneId);
 			}
