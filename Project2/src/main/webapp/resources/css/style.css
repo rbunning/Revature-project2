@@ -34,7 +34,7 @@ body {
     margin-bottom: 15px;
 }
 
-#loginH1 {
+#loginH1, #boardName {
 	font-family: 'Modak', cursive;
 }
 
