@@ -12,6 +12,7 @@ import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
 import com.revature.dao.DaoImpl;
+import com.revature.dto.TaskDTO;
 
 @Service
 public class AppService {
@@ -81,11 +82,6 @@ public class AppService {
 	}
 
 	public Task addNewTask(Task newTask) {
-		newTask = dao.createTask(newTask);
-		// Story dbStory = dao.getStoryById(story);
-		// dao.createTaskToStory(dbStory, newTask);
-		// ***might not need story to createTaskToStory, only need to get the story id
-		// to put into DB.
 		return dao.createTask(newTask);
 	}
 
@@ -95,5 +91,9 @@ public class AppService {
 
 	public Story updateStory(Story story) {
 		return dao.updateStoryById(story);
+
 	}
-}
+	public Story getStoryById(int storyId) {
+		return dao.getStoryById(storyId);
+	
+  }
