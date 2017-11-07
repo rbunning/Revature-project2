@@ -20,18 +20,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = 4991925864180552219L;
-	
+
 	@Id
 	@Column(name="TASK_ID")
-	@SequenceGenerator(name="taskSeq",sequenceName="task_seq", allocationSize=1)        
+	@SequenceGenerator(name="taskSeq",sequenceName="task_seq", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="taskSeq")
 	private int taskId;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="STORY_ID")
 	private Story story;
-	
+
 	@Column(name="TASK_DESC")
 	private String description;
 

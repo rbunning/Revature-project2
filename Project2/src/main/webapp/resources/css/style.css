@@ -16,7 +16,7 @@ body {
     border: 3px solid;
 }
 
-#usernameLabel, #passwordLabel, #submitLabel, #msgLabel, #navbarContent{
+#usernameLabel, #passwordLabel, #submitLabel, #msgLabel, #navbarContent, #boardName{
 	font-family: 'Dosis', sans-serif;
 }
 
