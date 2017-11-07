@@ -1,5 +1,6 @@
 window.onload = function() {
 }
+
 var scrumUser = {};
 var boardNumber = 2;
 var storyNumber = 0;
