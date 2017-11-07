@@ -150,7 +150,7 @@ public class DaoImpl implements Dao {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(LaneType.class).list();
 	}
-
+	
 	@Override
 	public LaneType getLaneById(LaneType lane) {
 		Session session = sessionFactory.getCurrentSession();

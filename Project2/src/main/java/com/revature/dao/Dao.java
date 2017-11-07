@@ -39,7 +39,7 @@ public interface Dao {
 	public List<ScrumUser> getAllUserList();
 
 	public List<LaneType> getLaneTypes();
-
+	
 	public List<Logs> getLogs();
 
 	public LaneType getLaneById(LaneType lane);

@@ -6,7 +6,10 @@ var boardNumber = 2;
 var currentStory = 0;
 var storyNow = {};
 var storyNumber = 0;
-
+var newTask = "";
+var isScrumMaster = false;
+var isDev = false;
+var isQA = false;
 angular
 		.module('jabrApp', [ 'ngRoute' ])
 
@@ -63,9 +66,9 @@ angular
 
 		.controller('navbarController', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
-			if ($scope.scrumUser.roleId.roleId == 2) {
-				$scope.isScrumMaster = true;
-			}
+			$scope.isScrumMaster = isScrumMaster;
+			$scope.isDev = isDev;
+			$scope.isQA = isQA;
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
 			}
@@ -97,7 +100,6 @@ angular
 			$scope.addUser = function() {
 				$location.path('/addAUser');
 			}
-
 			$scope.configChart = function() {
 				$location.path('/listBoard');
 			}
@@ -108,8 +110,12 @@ angular
 
 		.controller('moveStoryCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
+			$scope.isScrumMaster = isScrumMaster;
+			$scope.isDev = isDev;
+			$scope.isQA = isQA;
 			$http.get('listLanes').then(function(response) {
  				$scope.lanes = response.data;
+ 				console.log("lanes " + response.data);
  			}, function(response) {
  				console.log(response);
  			});
@@ -169,8 +175,15 @@ angular
 
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
+			$scope.isScrumMaster = isScrumMaster;
+			$scope.isDev = isDev;
+			$scope.isQA = isQA;
+			
 			$scope.moveStory = function(storyId) {
 				storyNumber = storyId;
+				$scope.isScrumMaster = isScrumMaster;
+				$scope.isDev = isDev;
+				$scope.isQA = isQA;
 				$location.path('/moveStory');
 			}
 			$scope.filterAllStoriesByLane = function(ltId) {
@@ -179,12 +192,11 @@ angular
 				console.log(stories);
 				return stories.filter(story => story.laneType.ltId == ltId);
 			}
-
 			$scope.filterStory = function(stories, laneId) {
 				return stories.filter(story => story.ltId == laneId);
 			}
 			var data = $.param({
-				boardId : boardNumber
+				boardId : boardNumber,
 			});
 			var config = {
 				headers : {
@@ -195,21 +207,36 @@ angular
 			$http.post('boardDetails', data, config).then(
 					 function(response) {
 						$scope.boardDetail = response.data;
-						$scope.goToAddTask = function(storyId) {
-							$location.path('/addTask');
-							currentStory = storyId;
-						}
-						
 					}, function(response) {
 						console.log(response);
 					});
-					var config = {
+			
+			$scope.addTask = function(storyId, taskDescription) {
+				currentStory = storyId;
+				//add validation so taskDescription is not null when user clicks button
+				newTask = taskDescription;
+				var data = $.param({
+					taskDescription : newTask,
+					storyId : currentStory
+				});
+				var config = {
 						headers : {
 							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 						}
 					}
-					// need a separate call to get user list - not part of board
-					// to prevent JSON infinite recursion
+				$http.post('newTask', data, config).then(
+						function(response) {
+							taskDescription = null;
+						}, function(response) {
+							console.log(response);
+						});
+						var config = {
+							headers : {
+								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+							}
+						}
+			}	
+			
 			$http.get('boardUsers').then(
 					function(response) {
 						$scope.boardUsers = response.data;
@@ -305,6 +332,26 @@ angular
 										function(response) {
 											scrumUser = response.data;
 											$scope.scrumUser = scrumUser;
+											switch ($scope.scrumUser.roleId.roleId) {
+											case 1:	//User
+												//who cares? lol
+												break;
+											case 2:	//Scrum Master
+												isScrumMaster = true;
+												isDev = true;
+												isQA = true;
+												break;
+											case 3:	//Developer
+												isDev = true;
+												isQA = true;
+												break;	
+											case 4:	//QA
+												isQA = true;
+												
+												break;
+											default:
+												break;
+											}
 											$location.path('/homePage');
 										},
 										function(response) {
@@ -390,34 +437,6 @@ angular
 								});
 						};
 					})
-		.controller(
-				"addTaskCtrl",
-				function($scope, $http, $location) {
-					$scope.scrumUser = scrumUser;
-					console.log("testing addTaskCtrl")
-					$scope.addTask = function() {
-						console.log("desctription:" + $scope.taskDescription);
-						console.log("storyID:" + currentStory);
-						var data = $.param({
-							taskDescription : $scope.taskDescription,
-							storyId : currentStory 
-						});
-						var config = {
-							headers : {
-								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
-							}
-						}
-									$http.post('newTask', data, config).then(
-											function(response) {
-												$location.path('/homePage');
-												console.log("New Task data: " + response.data)
-											}, function(response) {
-												console.log(response);
-											});
-
-					};
-
-				})
 
 		.controller('displayChartCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
