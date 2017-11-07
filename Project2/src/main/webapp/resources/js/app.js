@@ -244,8 +244,6 @@ angular
  			});
  			$scope.submit = function() {
  				var data = $.param({
- 					boardId : $scope.storyboard,
- 					laneTypeId : $scope.storylane,
  					storyName : $scope.storyname,
  					storyPoints : $scope.storypoint,
  					storyDesc : $scope.storydescription
