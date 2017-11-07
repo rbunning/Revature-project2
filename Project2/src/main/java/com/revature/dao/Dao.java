@@ -7,6 +7,7 @@ import com.revature.beans.LaneType;
 import com.revature.beans.ScrumUser;
 import com.revature.beans.Story;
 import com.revature.beans.Task;
+import com.revature.dto.TaskDTO;
 
 public interface Dao {
 
@@ -41,6 +42,8 @@ public interface Dao {
 	public LaneType getLaneById(LaneType lane);
 
 	public List<ScrumUser> getUsersNotOnBoard(Board board);
+	
+	public Story getStoryById (int storyId);
 
 	// UPDATE
 

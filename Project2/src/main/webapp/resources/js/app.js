@@ -2,7 +2,8 @@ window.onload = function() {
 }
 var scrumUser = {};
 var boardNumber = 2;
-
+var currentStory = 0;
+var storyNow = {};
 angular
 		.module('jabrApp', [ 'ngRoute' ])
 
@@ -53,6 +54,9 @@ angular
 			$scope.addABoard = function() {
 				$location.path('/addBoard');
 			}
+			$scope.addTask = function() {
+				$location.path('/addTask');
+			}
 			$scope.addAStory = function() {
 				$location.path('/addStory');
 			}
@@ -98,13 +102,6 @@ angular
 			});
 		})
 
-		.controller(
-				'boardDetailsCtrl',
-				function($scope, $http, $location) {
-					$scope.scrumUser = scrumUser;
-					var data = $.param({
-						boardId : boardNumber
-
 		.controller('boardDetailsCtrl', function($scope, $http, $location) {
 			$scope.scrumUser = scrumUser;
 			var data = $.param({
@@ -117,8 +114,14 @@ angular
 			}
 			//gets all the details for this board except users
 			$http.post('boardDetails', data, config).then(
-					function(response) {
+					 function(response) {
 						$scope.boardDetail = response.data;
+						$scope.goToAddTask = function(storyId) {
+							console.log("Testing addTask");
+							$location.path('/addTask');
+							currentStory = storyId;
+						}
+						
 					}, function(response) {
 						console.log(response);
 					});
@@ -127,13 +130,6 @@ angular
 							'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 						}
 					}
-					// gets all the details for this board except users
-					$http.post('boardDetails', data, config).then(
-							function(response) {
-								$scope.boardDetail = response.data;
-							}, function(response) {
-								console.log(response);
-							});
 					// need a separate call to get user list - not part of board
 					// to prevent JSON infinite recursion
 					$http.get('boardUsers').then(function(response) {
@@ -299,23 +295,28 @@ angular
 				"addTaskCtrl",
 				function($scope, $http, $location) {
 					$scope.scrumUser = scrumUser;
+					console.log("testing addTaskCtrl")
 					$scope.addTask = function() {
+						console.log("desctription:" + $scope.taskDescription);
+						console.log("storyID:" + currentStory);
 						var data = $.param({
-							description : $scope.taskDescription
-							
-							
+							taskDescription : $scope.taskDescription,
+							storyId : currentStory //instead of currentStory if would be response.data from the java controller
 						});
 						var config = {
 							headers : {
 								'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
 							}
 						}
-						$http.post('newTask', data, config).then(
-								function(response) {
-									$location.path('/homePage');
-								}, function(response) {
-									console.log(response);
-								});
+									$http.post('newTask', data, config).then(
+
+											function(response) {
+												$location.path('/homePage');
+												console.log("New Task data: " + response.data)
+											}, function(response) {
+												console.log(response);
+											});
+
 					};
 
 				})

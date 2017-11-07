@@ -29,11 +29,13 @@
 			</tr>
 
 			<tr data-ng-repeat="story in boardDetail.story" class="active text-center">			
-				<td>{{story.story}}</td>
+				
+				<td data-ng-click = "goToAddTask(story.story)">{{story.story}}</td>
 				<td>{{story.storyName}}</td>
 				<td>{{story.storyPoints}}</td>
 				<td>{{story.laneType.ltName}}</td>
 				<td>{{story.storyDesc}}</td>
+				
 			</tr>		
 		</tbody>
 	</table>
