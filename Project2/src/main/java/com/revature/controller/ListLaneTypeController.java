@@ -24,8 +24,6 @@ public class ListLaneTypeController {
 	
 	@RequestMapping(value = "/listLanes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<LaneType>> getBoards(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ScrumUser sUser = (ScrumUser) session.getAttribute("user");
 		List<LaneType> laneList = service.getLaneTypeList();
 		return new ResponseEntity<List<LaneType>>(laneList, HttpStatus.OK);
 	}
