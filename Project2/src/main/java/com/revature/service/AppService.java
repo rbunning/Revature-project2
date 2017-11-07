@@ -95,5 +95,6 @@ public class AppService {
 	}
 	public Story getStoryById(int storyId) {
 		return dao.getStoryById(storyId);
+	}
 	
   }
