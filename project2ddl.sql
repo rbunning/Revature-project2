@@ -60,7 +60,7 @@ CREATE TABLE chart(
  chart_id INT,
  board_id INT NOT NULL,
  chart_title VARCHAR2(4000),
- start_date DATE NOT NULL,
+ start_date DATE DEFAULT SYSDATE NOT NULL,
  PRIMARY KEY(chart_id),
  FOREIGN KEY(board_id) REFERENCES board(board_id)
 );
@@ -91,6 +91,13 @@ CREATE SEQUENCE story_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE task_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE chart_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE user_comment_seq START WITH 1 INCREMENT BY 1;
+/
+CREATE OR REPLACE TRIGGER board_chart_trg
+AFTER INSERT ON board
+FOR EACH ROW
+BEGIN
+  INSERT INTO chart (board_id, chart_title) VALUES (:new.board_id, :new.board_name);
+END;
 /
 CREATE OR REPLACE TRIGGER scrum_user_seq_trg
 BEFORE INSERT ON scrum_user

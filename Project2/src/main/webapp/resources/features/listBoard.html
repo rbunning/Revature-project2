@@ -3,11 +3,6 @@
 </head>
 
 <div data-ng-include src="'resources/features/navbar/scrumNavbar.html'"></div>
-<!-- <label>Board ID&emsp;&emsp;Board Name</label>
-<div class="item" data-ng-repeat="board in boards" >
-	<label>{{board.boardId}}&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{board.boardName}}</label>
-</div> -->
-
 
 <div id="displayEntries">
 	<table class="table table-bordered table-hover">
@@ -20,11 +15,10 @@
 				<th class="text-center">Board Name</th>
 			</tr>
 
-			<tr data-ng-repeat="board in boards" class="active text-center" data-ng-click="boardDetails(board.boardId)">			
+			<tr data-ng-repeat="board in boards" class="active text-center" data-ng-click="boardDetails(board.boardId)">
 				<td>{{board.boardId}}</td>
 				<td>{{board.boardName}}</td>
 			</tr>
-			
 		</tbody>
 		<tfoot>
 		</tfoot>

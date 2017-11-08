@@ -7,21 +7,21 @@
 <div id="displayEntries">
 	<table class="table table-bordered table-hover">
 		<thead>
-			<tr class="active"><th colspan="10" class="text-center">List of Boards</th></tr>
+			<tr class="active"><th colspan="10" class="text-center">Logs</th></tr>
 		</thead>
 		<tbody id="allEntries">
 			<tr class="active">
 				<th class="text-center">Date</th>
 				<th class="text-center">level</th>
-				<th class="text-center">Logger</th>
 				<th class="text-center">Message</th>
+				<th class="text-center">Logger</th>
 			</tr>
 
 			<tr data-ng-repeat="log in logs" class="active text-center">			
 				<td>{{log.logsDated}}</td>
 				<td>{{log.logsLevel}}</td>
-				<td>{{log.logsLogger}}</td>
 				<td>{{log.logsMessage}}</td>
+				<td>{{log.logsLogger}}</td>
 			</tr>		
 		</tbody>
 		<tfoot>
