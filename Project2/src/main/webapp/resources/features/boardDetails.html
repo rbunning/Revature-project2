@@ -39,81 +39,21 @@
 							class="glyphicon glyphicon-triangle-right"></span>
 						</a> <br /> <span>{{story.storyDesc}}</span>
 
-        <div class="panel-body">
-          <div data-ng-repeat="story in filterAllStoriesByLane(lane.ltId)" style="border-top: solid">
-            <a style="float: left" data-ng-hide="$parent.$first" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-left"></span>
-            </a>
-            <span class="label label-default">Points {{story.storyPoints}}</span>
-            <a style="float: right" data-ng-hide="$parent.$last" data-ng-click="moveStory(story.story)">
-              <span class="glyphicon glyphicon-triangle-right"></span>
-            </a>
-            <br />
-            <span>{{story.storyDesc}}</span>
-			
 						<div class="checkbox" data-ng-repeat="task in story.task">
-			              <label>
-			                <input type="checkbox" data-ng-model="task.status" data-ng-true-value="1" data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
-			              </label>
-				        </div>
-				       
-				        <input id="textboxId" data-ng-click ="newTaskDescription = null" data-ng-show="isDev" data-ng-model="newTaskDescription" type="text" placeholder="New Task">
-						 <button data-ng-click="addTask(story.story, newTaskDescription)" data-ng-show="isDev" class="btn btn-default">Add New Task</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div id="displayEntries">
-
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr class="info">
-				<th  class="text-center">Board ID</th>
-				<th  class="text-center">Board Name</th>
-			</tr>
-			<tr class= "active">
-				<td class="info text-center">{{boardDetail.boardId}}</td>
-				<td class="info text-center">{{boardDetail.boardName}}</td>
-			</tr>
-		</thead>
-	</table>
-
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries">
-			<tr class="active">
-				<th  class="text-center">Story ID</th>
-				<th  class="text-center">Story Name</th>
-				<th  class="text-center">Points</th>
-				<th  class="text-center">Lane</th>
-				<th  class="text-center">Description</th>
-			</tr>
-
-     <tr data-ng-repeat="story in boardDetail.story" class="active text-center" data-ng-click="moveStory(story.story)">			
-				<td data-ng-click = "goToAddTask(story.story)" onmouseover="" style="cursor: pointer;">{{story.story}}</td>
-				<td>{{story.storyName}}</td>
-				<td>{{story.storyPoints}}</td>
-				<td>{{story.laneType.ltName}}</td>
-				<td>{{story.storyDesc}}</td>
-			</tr>		
-		</tbody>
-	</table>
-
-	<table class="table table-bordered table-hover">
-		<tbody id="allEntries" data-ng-repeat="story in boardDetail.story">
-			<tr class="active">
-				<th  class="text-center">Task ID</th>
-				<th  class="text-center">Task Description</th>
-			</tr>
-
-			<tr data-ng-repeat="t in story.task" class="active text-center">
-				<td>{{t.taskId}}</td>
-				<td>{{t.description}}</td>
-			</tr>
+							<label> <input type="checkbox"
+								data-ng-model="task.status" data-ng-true-value="1"
+								data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
+							</label>
+						</div>
+						
+						<input id="textboxId" data-ng-click="newTaskDescription = null"
+									data-ng-show="isDev" data-ng-model="newTaskDescription"
+									type="text" placeholder="New Task">
+								<button data-ng-click="addTask(story.story, newTaskDescription)"
+									data-ng-show="isDev" class="btn btn-default">Add New
+									Task</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
