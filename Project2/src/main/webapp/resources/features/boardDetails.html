@@ -45,6 +45,13 @@
 								data-ng-false-value="0" data-ng-change="updateTask(task)">{{task.description}}
 							</label>
 						</div>
+						
+						<input id="textboxId" data-ng-click="newTaskDescription = null"
+									data-ng-show="isDev" data-ng-model="newTaskDescription"
+									type="text" placeholder="New Task">
+								<button data-ng-click="addTask(story.story, newTaskDescription)"
+									data-ng-show="isDev" class="btn btn-default">Add New
+									Task</button>
 					</div>
 				</div>
 			</div>
